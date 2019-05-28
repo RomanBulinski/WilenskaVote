@@ -1,6 +1,6 @@
 <div
-  (click)="changeColor()"
-  [className]="condition ? 'onselected' : 'selected'"
+  (click)="changeColor() + sendButtonIDMessage()"
+  [className]="buttonOn ? 'onselected' : 'selected'"
 >
   {{ buttonLabel }}
 </div>

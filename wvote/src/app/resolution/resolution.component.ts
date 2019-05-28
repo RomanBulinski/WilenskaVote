@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { OwnersServiceService } from "../owners/owners-service.service";
 import { MyButtonComponent } from "../my-button/my-button.component";
 
@@ -12,9 +12,15 @@ export class ResolutionComponent implements OnInit {
   votesFor: number = 0;
   votesAgainst: number = 0;
   votesAbstention: number = 0;
+  @ViewChild(MyButtonComponent) mybutton: MyButtonComponent;
+  buttonId: string;
+  buttonOn: string;
+
   constructor(service: OwnersServiceService) {
     this.owners = service.getOwners();
   }
+
+  showDataFromChiled() {}
 
   ngOnInit() {}
 
@@ -28,5 +34,15 @@ export class ResolutionComponent implements OnInit {
 
   incrementVAbstention(value: any) {
     this.votesAbstention = this.votesAbstention + value;
+  }
+
+  receiveButtonId($event) {
+    this.buttonId = $event;
+    console.log("ID z rodzica : " + this.buttonId);
+  }
+
+  receiveButtonOn($event) {
+    this.buttonOn = $event;
+    console.log("ON z rodzica : " + this.buttonOn);
   }
 }

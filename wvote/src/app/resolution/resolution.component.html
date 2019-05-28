@@ -6,14 +6,18 @@
 
       <div class="row oneOwner">
         <app-my-button
+          buttonID="for{{ owner.ownerId }}"
           buttonLabel="for"
           (click)="incrementVFor(owner.participation)"
+          (messageEventID)="receiveButtonId($event)"
+          (messageEventON)="receiveButtonON($event)"
           >vote for</app-my-button
         >
       </div>
 
       <div class="row oneOwner">
         <app-my-button
+          buttonID="against{{ owner.ownerId }}"
           buttonLabel="against"
           (click)="incrementVAgainst(owner.participation)"
         ></app-my-button>
@@ -21,6 +25,7 @@
 
       <div class="row oneOwner">
         <app-my-button
+          buttonID="abstention{{ owner.ownerId }}"
           buttonLabel="abstention"
           (click)="incrementVAbstention(owner.participation)"
         ></app-my-button>

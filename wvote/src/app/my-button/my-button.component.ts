@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, EventEmitter, Output } from "@angular/core";
 
 @Component({
   selector: "app-my-button",
@@ -6,19 +6,31 @@ import { Component, OnInit, Input } from "@angular/core";
   styleUrls: ["./my-button.component.scss"]
 })
 export class MyButtonComponent implements OnInit {
-  condition: boolean = false;
-
+  buttonOn: boolean = false;
   @Input() buttonLabel: string;
+  @Input() buttonID: string;
+  @Output() messageEventID = new EventEmitter<string>();
+  @Output() messageEventON = new EventEmitter<string>();
 
   constructor() {}
 
   ngOnInit() {}
 
   changeColor() {
-    if (this.condition == true) {
-      this.condition = false;
-    } else if (this.condition == false) {
-      this.condition = true;
+    if (this.buttonOn == true) {
+      this.buttonOn = false;
+    } else if (this.buttonOn == false) {
+      this.buttonOn = true;
     }
+  }
+
+  sendButtonIDMessage() {
+    this.messageEventID.emit(this.buttonID);
+    console.log("send ID" + this.buttonID);
+  }
+
+  sendButtonOnMessage() {
+    this.messageEventON.emit(String(this.buttonOn));
+    console.log("send ON" + this.buttonOn);
   }
 }
