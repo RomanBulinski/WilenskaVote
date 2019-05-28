@@ -1,0 +1,40 @@
+// import { Injectable } from '@angular/core';
+
+// @Injectable({
+//   providedIn: 'root'
+// })
+export class OwnersServiceService {
+  // constructor() { }
+
+  Owner1 = {
+    ownerId: 1,
+    fullname: "Tom Segev",
+    property: 1,
+    participation: 1.21
+  };
+
+  Owner2 = {
+    ownerId: 2,
+    fullname: "Zenek Kwiatkowski",
+    property: 2,
+    participation: 0.73
+  };
+
+  Owner3 = {
+    ownerId: 3,
+    fullname: "Jozek Cyrankiewicz",
+    property: 3,
+    participation: 0.93
+  };
+
+  Owner4 = {
+    ownerId: 4,
+    fullname: "Wiesik Gazda ",
+    property: 4,
+    participation: 1.77
+  };
+
+  getOwners() {
+    return [this.Owner1, this.Owner2, this.Owner3, this.Owner4];
+  }
+}
