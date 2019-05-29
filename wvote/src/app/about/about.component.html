@@ -2,26 +2,12 @@
   about works!
 </p>
 
-<app-my-button buttonLabel="ooooo">cc</app-my-button>
-<app-my-button>cc</app-my-button>
+<input
+  type="file"
+  class="upload"
+  (change)="changeListener($event.target.files)"
+/>
 
-<!-- <app-my-button
-id="for{{ owner.ownerId }}"
-(click)="onSelected(owner)"
-[class.selected]="owner === selectedMyButton"
->ffff</app-my-button
-> -->
-
-<!-- <button
-id="for{{ owner.ownerId }}"
-checking="butColor"
-[style.backgroundColor+id]="idys[0]"
-(click)="
-  incrementVFor(owner.participation) +
-    onClick($event) +
-    addButtonID($event) +
-    printIdys()
-"
->
-vote for
-</button> -->
+<p>
+  {{ verylongString }}
+</p>

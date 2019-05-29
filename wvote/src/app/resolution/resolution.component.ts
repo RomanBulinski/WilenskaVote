@@ -14,7 +14,7 @@ export class ResolutionComponent implements OnInit {
   votesAbstention: number = 0;
   @ViewChild(MyButtonComponent) mybutton: MyButtonComponent;
   buttonId: string;
-  buttonOn: string;
+  buttonOn: boolean;
 
   constructor(service: OwnersServiceService) {
     this.owners = service.getOwners();
@@ -28,21 +28,29 @@ export class ResolutionComponent implements OnInit {
     this.votesFor = this.votesFor + value;
   }
 
+  decrementVFor(value: any) {
+    this.votesFor = this.votesFor - value;
+  }
+
   incrementVAgainst(value: any) {
     this.votesAgainst = this.votesAgainst + value;
+  }
+  decrementVAgainst(value: any) {
+    this.votesAgainst = this.votesAgainst - value;
   }
 
   incrementVAbstention(value: any) {
     this.votesAbstention = this.votesAbstention + value;
   }
+  decrementVAbstention(value: any) {
+    this.votesAbstention = this.votesAbstention - value;
+  }
 
   receiveButtonId($event) {
     this.buttonId = $event;
-    console.log("ID z rodzica : " + this.buttonId);
   }
 
   receiveButtonOn($event) {
-    this.buttonOn = $event;
-    console.log("ON z rodzica : " + this.buttonOn);
+    this.buttonOn = JSON.parse($event);
   }
 }

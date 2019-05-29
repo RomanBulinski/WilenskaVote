@@ -26,11 +26,9 @@ export class MyButtonComponent implements OnInit {
 
   sendButtonIDMessage() {
     this.messageEventID.emit(this.buttonID);
-    console.log("send ID" + this.buttonID);
   }
 
   sendButtonOnMessage() {
     this.messageEventON.emit(String(this.buttonOn));
-    console.log("send ON" + this.buttonOn);
   }
 }
