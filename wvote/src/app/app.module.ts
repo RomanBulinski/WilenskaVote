@@ -1,3 +1,4 @@
+import { environment } from "./../environments/environment";
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 
@@ -14,6 +15,9 @@ import { OwnersServiceService } from "./owners/owners-service.service";
 import { MyButtonComponent } from "./my-button/my-button.component";
 import { HttpClientModule } from "@angular/common/http";
 
+import { AngularFireAuthModule } from "angularfire2/auth";
+import { AngularFireModule } from "angularfire2";
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,7 +29,14 @@ import { HttpClientModule } from "@angular/common/http";
     OwnersComponent,
     MyButtonComponent
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireAuthModule
+  ],
+
   providers: [OwnersServiceService],
   bootstrap: [AppComponent]
 })

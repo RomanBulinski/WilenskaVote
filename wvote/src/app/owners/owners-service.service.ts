@@ -1,13 +1,10 @@
 // import { Injectable } from '@angular/core';
-import { AboutComponent } from "../about/about.component";
 
 // @Injectable({
 //   providedIn: 'root'
 // })
 export class OwnersServiceService {
   // constructor() { }
-
-  aboutComponent: AboutComponent = new AboutComponent();
 
   Owner1 = {
     ownerId: 1,
