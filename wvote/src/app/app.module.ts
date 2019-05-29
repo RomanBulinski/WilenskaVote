@@ -11,7 +11,8 @@ import { ResolutionComponent } from "./resolution/resolution.component";
 import { OwnersComponent } from "./owners/owners.component";
 
 import { OwnersServiceService } from "./owners/owners-service.service";
-import { MyButtonComponent } from './my-button/my-button.component';
+import { MyButtonComponent } from "./my-button/my-button.component";
+import { HttpClientModule } from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -24,7 +25,7 @@ import { MyButtonComponent } from './my-button/my-button.component';
     OwnersComponent,
     MyButtonComponent
   ],
-  imports: [BrowserModule, AppRoutingModule],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
   providers: [OwnersServiceService],
   bootstrap: [AppComponent]
 })

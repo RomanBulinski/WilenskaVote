@@ -11,6 +11,7 @@ export class OwnersComponent implements OnInit {
 
   constructor(service: OwnersServiceService) {
     this.owners = service.getOwners();
+    console.log("xxxxxxxxxxxxxxx" + this.owners);
   }
 
   ngOnInit() {}

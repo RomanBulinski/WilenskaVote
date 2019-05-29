@@ -7,7 +7,6 @@ import { Component, OnInit } from "@angular/core";
 })
 export class AboutComponent implements OnInit {
   verylongString = [];
-  files = "wilenska_03.csv";
 
   constructor() {}
 
@@ -34,9 +33,6 @@ export class AboutComponent implements OnInit {
   //   }
   // }
 
-  files = "wilenska_03.csv";
-
-  // public changeListener(files: FileList) {
   public changeListener(files: FileList) {
     // console.log(files);
     if (files && files.length > 0) {
@@ -44,7 +40,6 @@ export class AboutComponent implements OnInit {
       // console.log(file.name);
       // console.log(file.size);
       // console.log(file.type);
-
       let reader: FileReader = new FileReader();
       reader.readAsText(file);
       reader.onload = e => {

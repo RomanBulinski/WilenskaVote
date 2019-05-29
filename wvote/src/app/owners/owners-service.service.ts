@@ -7,7 +7,7 @@ import { AboutComponent } from "../about/about.component";
 export class OwnersServiceService {
   // constructor() { }
 
-  aboutComponent: AboutComponent;
+  aboutComponent: AboutComponent = new AboutComponent();
 
   Owner1 = {
     ownerId: 1,
