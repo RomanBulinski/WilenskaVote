@@ -2,14 +2,58 @@
   contact works!
 </p>
 
-<!-- <div>
-  <button class="btn btn1 btn2" (click)="readCsvData()">
-    Read CSV Data
-  </button>
-</div> -->
+<!-- <p>
+  TUTaJ
+  {{ peopleInJSON }}
+</p> -->
 
-<!-- <table border="1" class="demoTable">
-  <tr *ngFor="let x of csvData">
-    <td *ngFor="let y of x">{{ y }}</td>
-  </tr>
-</table> -->
+<ul>
+  <li *ngFor="let owner of peopleInJSON">
+    <div>
+      {{ owner.id }} :{{ owner.fullname }} : {{ owner.property }} :
+      {{ owner.participation }}
+
+      <div class="row oneOwner">
+        <app-my-button
+          buttonID="for{{ owner.ownerId }}"
+          buttonLabel="for"
+          (click)="
+            buttonOn
+              ? incrementVFor(owner.participation)
+              : decrementVFor(owner.participation)
+          "
+          (messageEventID)="receiveButtonId($event)"
+          (messageEventON)="receiveButtonOn($event)"
+        ></app-my-button>
+      </div>
+
+      <div class="row oneOwner">
+        <app-my-button
+          buttonID="against{{ owner.ownerId }}"
+          buttonLabel="against"
+          (click)="
+            buttonOn
+              ? incrementVAgainst(owner.participation)
+              : decrementVAgainst(owner.participation)
+          "
+          (messageEventID)="receiveButtonId($event)"
+          (messageEventON)="receiveButtonOn($event)"
+        ></app-my-button>
+      </div>
+
+      <div class="row oneOwner">
+        <app-my-button
+          buttonID="abstention{{ owner.ownerId }}"
+          buttonLabel="abstention"
+          (click)="
+            buttonOn
+              ? incrementVAbstention(owner.participation)
+              : decrementVAbstention(owner.participation)
+          "
+          (messageEventID)="receiveButtonId($event)"
+          (messageEventON)="receiveButtonOn($event)"
+        ></app-my-button>
+      </div>
+    </div>
+  </li>
+</ul>

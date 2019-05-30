@@ -36,8 +36,7 @@ import { AngularFireModule } from "angularfire2";
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule
   ],
-
-  providers: [OwnersServiceService],
+  providers: [OwnersServiceService, AngularFireModule],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
