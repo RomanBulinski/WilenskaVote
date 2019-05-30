@@ -1,10 +1,40 @@
-// import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core";
 
-// @Injectable({
-//   providedIn: 'root'
-// })
+import { HttpClient } from "@angular/common/http";
+
+@Injectable({
+  providedIn: "root"
+})
 export class OwnersServiceService {
-  // constructor() { }
+  peopleInJSON = [];
+  // http: HttpClient;
+
+  constructor(private http: HttpClient) {
+    const ids = [];
+    this.http.get("assets/wilenska03.csv", { responseType: "text" }).subscribe(
+      data => {
+        const lines = data.split("\n");
+        lines.forEach(line => {
+          var ownerJson: {
+            ownerId: number;
+            fullname: string;
+            property: string;
+            participation: string;
+          } = { ownerId: 0, fullname: "", property: "", participation: "" };
+          ownerJson.ownerId = ids.length + 1;
+          ownerJson.fullname = line.split(",")[0];
+          ownerJson.property = line.split(",")[1];
+          ownerJson.participation = line.split(",")[2];
+          ids.push(ownerJson);
+          console.log(ownerJson);
+        });
+        this.peopleInJSON = ids;
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
 
   Owner1 = {
     ownerId: 1,
@@ -49,15 +79,14 @@ export class OwnersServiceService {
   };
 
   getOwners() {
-    // return this.aboutComponent.getListOfOwners();
-    return [
-      this.Owner1,
-      this.Owner2,
-      this.Owner3,
-      this.Owner4,
-      this.Owner5,
-      this.Owner6
-    ];
-    console.log("jestem z owners service service");
+    return this.peopleInJSON;
+    // return [
+    //   this.Owner1,
+    //   this.Owner2,
+    //   this.Owner3,
+    //   this.Owner4,
+    //   this.Owner5,
+    //   this.Owner6
+    // ];
   }
 }
