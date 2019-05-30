@@ -1,5 +1,4 @@
 import { Injectable } from "@angular/core";
-
 import { HttpClient } from "@angular/common/http";
 
 @Injectable({
@@ -7,7 +6,6 @@ import { HttpClient } from "@angular/common/http";
 })
 export class OwnersServiceService {
   peopleInJSON = [];
-  // http: HttpClient;
 
   constructor(private http: HttpClient) {
     const ids = [];
@@ -19,14 +17,13 @@ export class OwnersServiceService {
             ownerId: number;
             fullname: string;
             property: string;
-            participation: string;
-          } = { ownerId: 0, fullname: "", property: "", participation: "" };
+            participation: number;
+          } = { ownerId: 0, fullname: "", property: "", participation: 0 };
           ownerJson.ownerId = ids.length + 1;
           ownerJson.fullname = line.split(",")[0];
           ownerJson.property = line.split(",")[1];
-          ownerJson.participation = line.split(",")[2];
+          ownerJson.participation = Number(line.split(",")[2]);
           ids.push(ownerJson);
-          console.log(ownerJson);
         });
         this.peopleInJSON = ids;
       },

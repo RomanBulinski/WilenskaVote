@@ -1,8 +1,12 @@
+<h4>GŁOSOWANIE ZA UCHWAŁĄ NR ... w SPRAWIE ....</h4>
+
 <ul>
   <li *ngFor="let owner of owners">
     <div>
-      {{ owner.ownerId }} :{{ owner.fullname }} : {{ owner.property }} :
-      {{ owner.participation }}
+      <div>
+        {{ owner.ownerId }} :{{ owner.fullname }} : {{ owner.property }} :
+        {{ owner.participation }}
+      </div>
 
       <div class="row oneOwner">
         <app-my-button

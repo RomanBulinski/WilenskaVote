@@ -26,6 +26,7 @@ export class ResolutionComponent implements OnInit {
 
   incrementVFor(value: any) {
     this.votesFor = this.votesFor + value;
+    console.log(this.votesFor);
   }
 
   decrementVFor(value: any) {

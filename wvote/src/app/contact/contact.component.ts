@@ -1,8 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { HttpClientModule } from "@angular/common/http";
-import { HttpClient } from "@angular/common/http";
-
-// import { FirebaseService } from "./firebase.service";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 
 @Component({
   selector: "app-contact",
@@ -10,36 +7,26 @@ import { HttpClient } from "@angular/common/http";
   styleUrls: ["./contact.component.scss"]
 })
 export class ContactComponent implements OnInit {
-  // constructor() {}
+  messageForm: FormGroup;
+  submitted = false;
+  success = false;
 
-  peopleInJSON = [];
-
-  constructor(private http: HttpClient) {}
+  constructor(private formBuilder: FormBuilder) {}
 
   ngOnInit() {
-    const ids = [];
-    this.http.get("assets/wilenska03.csv", { responseType: "text" }).subscribe(
-      data => {
-        const lines = data.split("\n");
-        lines.forEach(line => {
-          var ownerJson: {
-            ownerId: number;
-            fullname: string;
-            property: string;
-            participation: string;
-          } = { ownerId: 0, fullname: "", property: "", participation: "" };
-          ownerJson.ownerId = ids.length + 1;
-          ownerJson.fullname = line.split(",")[0];
-          ownerJson.property = line.split(",")[1];
-          ownerJson.participation = line.split(",")[2];
-          ids.push(ownerJson);
-          console.log(ownerJson);
-        });
-        this.peopleInJSON = ids;
-      },
-      error => {
-        console.log(error);
-      }
-    );
+    this.messageForm = this.formBuilder.group({
+      name: ["", Validators.required],
+      message: ["", Validators.required]
+    });
+  }
+
+  onSubmit() {
+    this.submitted = true;
+
+    if (this.messageForm.invalid) {
+      return;
+    }
+
+    this.success = true;
   }
 }
