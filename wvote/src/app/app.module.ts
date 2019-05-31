@@ -17,6 +17,8 @@ import { HttpClientModule } from "@angular/common/http";
 
 import { AngularFireAuthModule } from "angularfire2/auth";
 import { AngularFireModule } from "angularfire2";
+import { AngularFireDatabaseModule } from "angularfire2/database";
+
 import { ReactiveFormsModule } from "@angular/forms";
 
 @NgModule({
@@ -35,6 +37,7 @@ import { ReactiveFormsModule } from "@angular/forms";
     AppRoutingModule,
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireDatabaseModule,
     AngularFireAuthModule,
     ReactiveFormsModule
   ],

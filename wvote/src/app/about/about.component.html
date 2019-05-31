@@ -1,13 +1,8 @@
 <p>
   about works!
 </p>
-
-<input
-  type="file"
-  class="upload"
-  (change)="changeListener($event.target.files)"
-/>
-
-<p>
-  {{ verylongString }}
-</p>
+<ul>
+  <li *ngFor="let owner of owners">
+    {{ owner.fullname }} {{ owner.property }}
+  </li>
+</ul>
