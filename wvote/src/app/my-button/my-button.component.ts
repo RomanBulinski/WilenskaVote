@@ -31,4 +31,10 @@ export class MyButtonComponent implements OnInit {
   sendButtonOnMessage() {
     this.messageEventON.emit(String(this.buttonOn));
   }
+
+  allFunctions() {
+    this.sendButtonIDMessage();
+    this.sendButtonOnMessage();
+    this.changeColor();
+  }
 }
