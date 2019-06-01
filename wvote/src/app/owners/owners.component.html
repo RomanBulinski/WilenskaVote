@@ -1,8 +1,19 @@
 <h4>LISTA WŁAŚCICIELI</h4>
-<button (click)="ngOnDestroy()">Go offline</button>
+
+<input #owner type="text" (keyup.enter)="add(owner)" />
+
+<!-- <ul>
+  <li *ngFor="let owner of owners$ | async">
+    {{ owner.$value || owner.fullname }}: {{ owner.property }} :
+    {{ owner.participation }}
+    <button (click)="update(owner)">UPDATE</button>
+  </li>
+</ul> -->
 
 <ul>
-  <li *ngFor="let owner of owners">
-    {{ owner.fullname }} : {{ owner.property }} : {{ owner.participation }}
+  <li *ngFor="let owner of owners; let i = index">
+    {{ i }} : {{ owner.fullname }} : {{ owner.property }}
+    <button (click)="update(owner)">UPDATE</button>
+    <button (click)="getInfo(owner)">INFO</button>
   </li>
 </ul>
