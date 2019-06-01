@@ -15,7 +15,6 @@ export class AboutComponent implements OnInit {
       .valueChanges()
       .subscribe(owners => {
         this.owners = owners;
-        console.log(this.owners);
       });
   }
 
