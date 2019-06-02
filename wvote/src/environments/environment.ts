@@ -14,12 +14,12 @@
 export const environment = {
   production: false,
   firebaseConfig: {
-    apiKey: "AIzaSyBm5gBvsxRTmNXm421zKVge1IwKRnf_npk",
-    authDomain: "wilenvote.firebaseapp.com",
-    databaseURL: "https://wilenvote.firebaseio.com",
-    projectId: "wilenvote",
-    storageBucket: "wilenvote.appspot.com",
-    messagingSenderId: "222104883477",
-    appId: "1:222104883477:web:157218a36dcbbf5b"
+    apiKey: "AIzaSyCGF0P_OqxDlCEBq0YNT0bq8_ChXzVEgVc",
+    authDomain: "wilenvote-59888.firebaseapp.com",
+    databaseURL: "https://wilenvote-59888.firebaseio.com",
+    projectId: "wilenvote-59888",
+    storageBucket: "wilenvote-59888.appspot.com",
+    messagingSenderId: "975499013978",
+    appId: "1:975499013978:web:1a7a51ab33aa8daf"
   }
 };
