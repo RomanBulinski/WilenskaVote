@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
-import { OwnersServiceService } from "../owners/owners-service.service";
 import { MyButtonComponent } from "../my-button/my-button.component";
+import { FirebaseRTDBService } from "../service/firebase-rtdb.service";
 
 @Component({
   selector: "app-resolution",
@@ -8,7 +8,6 @@ import { MyButtonComponent } from "../my-button/my-button.component";
   styleUrls: ["./resolution.component.scss"]
 })
 export class ResolutionComponent implements OnInit {
-  owners;
   votesFor: number = 0;
   votesAgainst: number = 0;
   votesAbstention: number = 0;
@@ -16,8 +15,14 @@ export class ResolutionComponent implements OnInit {
   buttonId: string;
   buttonOn: boolean;
 
-  constructor(service: OwnersServiceService) {
-    this.owners = service.getOwners();
+  // constructor(service: OwnersServiceService) {
+  //   this.owners = service.getOwners();
+  // }
+
+  owners: any[];
+
+  constructor(db: FirebaseRTDBService) {
+    this.owners = db.getOwners();
   }
 
   showDataFromChiled() {}

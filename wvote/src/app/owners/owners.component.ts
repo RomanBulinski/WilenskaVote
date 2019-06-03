@@ -5,6 +5,7 @@ import { AngularFireDatabase, AngularFireList } from "angularfire2/database";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
 import { Key } from "protractor";
+import { FirebaseRTDBService } from "../service/firebase-rtdb.service";
 
 @Component({
   selector: "app-owners",
@@ -17,7 +18,7 @@ export class OwnersComponent {
   // }
   // owners$;
   observable$: Observable<any[]>;
-  owners$: AngularFireList<any[]>;
+  owners$: AngularFireList<any>;
   owners: any[];
   newOwners$: any;
 
@@ -25,26 +26,26 @@ export class OwnersComponent {
   // owners: any[];
   // subscription: Subscription;
   // constructor(db: AngularFireDatabase) {
-  constructor(private db: AngularFireDatabase) {
-    // this.owners$ = db.list("/").valueChanges();
+  // constructor(private db: AngularFireDatabase) {
+  constructor(private db: FirebaseRTDBService) {
     // this.owners$ = db.list("/");
-    this.owners$ = db.list("/");
+    this.owners$ = db.getOwnersAngularFireList();
+    this.owners = db.getOwners();
+    // this.observable$ = db.list("/").valueChanges();
+    // console.log(this.observable$);
 
-    this.observable$ = db.list("/").valueChanges();
+    // db.list("/")
+    //   .valueChanges()
+    //   .subscribe(owners => {
+    //     this.owners = owners;
+    //   });
 
-    console.log(this.observable$);
-
-    db.list("/")
-      .valueChanges()
-      .subscribe(owners => {
-        this.owners = owners;
-      });
-
-    this.newOwners$ = db.list("/").snapshotChanges();
+    // this.newOwners$ = db.list("/").snapshotChanges();
     // this.newOwners$ = this.newOwners$.snapshotChanges().map(changes => {
     //   return changes.map(c => ({ key: c.payload.key, ...c.payload.val() }));
     // });
   }
+
   add(owner: HTMLInputElement) {
     console.log("dodaje");
     this.owners$.push({
@@ -78,18 +79,4 @@ export class OwnersComponent {
     console.log("values : " + Object.values(owner));
     // console.log("seal : " + owner.payload.key);
   }
-
-  // constructor(db: AngularFireDatabase) {
-  //   this.subscription = db
-  //     .list("/")
-  //     .valueChanges()
-  //     .subscribe(owners => {
-  //       this.owners = owners;
-  //       console.log(this.owners);
-  //     });
-  // }
-
-  // ngOnDestroy() {
-  //   this.subscription.unsubscribe();
-  // }
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 
 import { AngularFireDatabase } from "angularfire2/database";
+import { FirebaseRTDBService } from "../service/firebase-rtdb.service";
 
 @Component({
   selector: "app-about",
@@ -10,12 +11,8 @@ import { AngularFireDatabase } from "angularfire2/database";
 export class AboutComponent implements OnInit {
   owners: any[];
 
-  constructor(db: AngularFireDatabase) {
-    db.list("/")
-      .valueChanges()
-      .subscribe(owners => {
-        this.owners = owners;
-      });
+  constructor(db: FirebaseRTDBService) {
+    this.owners = db.getOwners();
   }
 
   ngOnInit() {}
