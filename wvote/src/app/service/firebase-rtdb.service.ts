@@ -1,3 +1,4 @@
+import { Owner } from "./../owners/owner";
 import { Injectable } from "@angular/core";
 import { AngularFireDatabase, AngularFireList } from "angularfire2/database";
 
@@ -5,9 +6,9 @@ import { AngularFireDatabase, AngularFireList } from "angularfire2/database";
   providedIn: "root"
 })
 export class FirebaseRTDBService {
-  owners: any[];
-  owners$: AngularFireList<any>;
   dibi: AngularFireDatabase;
+  owners: any[];
+  owners$: AngularFireList<Owner>;
 
   constructor(db: AngularFireDatabase) {
     db.list("/")
@@ -19,19 +20,22 @@ export class FirebaseRTDBService {
     this.dibi = db;
   }
 
+  createOwner(_fullname, owner: Owner): void {
+    this.owners$.set(_fullname, owner);
+    this.dibi.object(_fullname).update({
+      fullname: _fullname
+    });
+  }
+
+  update(ownerfullname: string) {
+    return this.dibi.object(ownerfullname);
+  }
+
   getOwners() {
     return this.owners;
   }
 
   getOwnersAngularFireList() {
     return this.owners$;
-  }
-
-  tryObject() {
-    console.log(this.owners.keys());
-  }
-
-  object(ownerfullname: string) {
-    return this.dibi.object(ownerfullname);
   }
 }

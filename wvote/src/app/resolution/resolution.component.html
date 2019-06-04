@@ -14,7 +14,7 @@
           buttonLabel="for"
           (click)="
             buttonOn
-              ? incrementVFor(owner.participation)
+              ? incrementVFor(owner.participation) + updateForActiv(owner)
               : decrementVFor(owner.participation)
           "
           (messageEventID)="receiveButtonId($event)"
@@ -28,7 +28,8 @@
           buttonLabel="against"
           (click)="
             buttonOn
-              ? incrementVAgainst(owner.participation)
+              ? incrementVAgainst(owner.participation) +
+                updateAgainsActiv(owner)
               : decrementVAgainst(owner.participation)
           "
           (messageEventID)="receiveButtonId($event)"
@@ -42,7 +43,8 @@
           buttonLabel="abstention"
           (click)="
             buttonOn
-              ? incrementVAbstention(owner.participation)
+              ? incrementVAbstention(owner.participation) +
+                updateAstentionActiv(owner)
               : decrementVAbstention(owner.participation)
           "
           (messageEventID)="receiveButtonId($event)"

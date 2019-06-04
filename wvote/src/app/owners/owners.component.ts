@@ -5,6 +5,7 @@ import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
 import { Key } from "protractor";
 import { FirebaseRTDBService } from "../service/firebase-rtdb.service";
+import { Owner } from "./../owners/owner";
 
 @Component({
   selector: "app-owners",
@@ -13,60 +14,43 @@ import { FirebaseRTDBService } from "../service/firebase-rtdb.service";
 })
 export class OwnersComponent {
   observable$: Observable<any[]>;
-  owners$: AngularFireList<any>;
+  owners$: AngularFireList<Owner>;
   owners: any[];
   newOwners$: any;
+  owner: Owner = new Owner();
 
-  // owner;
-  // owners: any[];
-  // subscription: Subscription;
-  // constructor(db: AngularFireDatabase) {
-  // constructor(private db: AngularFireDatabase) {
   constructor(private db: FirebaseRTDBService) {
-    // this.owners$ = db.list("/");
     this.owners$ = db.getOwnersAngularFireList();
     this.owners = db.getOwners();
     this.observable$ = this.owners$.valueChanges();
-    // this.observable$ = db.list("/");
-    // console.log(this.observable$);
-
-    // this.observable$ = this.owners$.snapshotChanges().map(changes => {
-    //   return changes.map(c => ({ key: c.payload.key, ...c.payload.val() }));
-    // });
-
-    // db.list("/")
-    //   .valueChanges()
-    //   .subscribe(owners => {
-    //     this.owners = owners;
-    //   });
-
-    // this.newOwners$ = db.list("/").snapshotChanges();
-    // this.newOwners$ = this.newOwners$.snapshotChanges().map(changes => {
-    //   return changes.map(c => ({ key: c.payload.key, ...c.payload.val() }));
-    // });
   }
 
+  // add2(owner: HTMLInputElement) {
+  //   console.log("dodaje");
+  //   this.owners$.set(owner.value, {
+  //     // fullname: "gargamel",
+  //     fullname: owner.value,
+  //     key: owner.checked,
+  //     price: 150,
+  //     isLive: true,
+  //     sections: [
+  //       { title: "Compoenentsssss" },
+  //       { title: "Directives" },
+  //       { title: "TEmplate" }
+  //     ]
+  //   });
+  //   owner.value = "AAA";
+  // }
   add(owner: HTMLInputElement) {
-    console.log("dodaje");
-    this.owners$.set(owner.value, {
-      // fullname: "gargamel",
-      fullname: owner.value,
-      key: owner.checked,
-      price: 150,
-      isLive: true,
-      sections: [
-        { title: "Compoenentsssss" },
-        { title: "Directives" },
-        { title: "TEmplate" }
-      ]
-    });
-    owner.value = "AAA";
+    this.db.createOwner(owner.value, this.owner);
+    owner.value = "dodane";
   }
 
   update(owner) {
-    this.db.object(owner.fullname).update({
-      property: owner.property + "-------------"
+    this.db.update(owner.fullname).update({
+      list_of_votes: { "2019_1": "for", "2019_2": "against" }
     });
+    console.log("try update !!!");
   }
 
   getInfo(owner) {

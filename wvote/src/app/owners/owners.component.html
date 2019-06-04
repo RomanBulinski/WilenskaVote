@@ -1,7 +1,5 @@
 <h4>LISTA WŁAŚCICIELI</h4>
 
-<input #owner type="text" (keyup.enter)="add(owner)" />
-
 <!-- <ul>
   <li *ngFor="let owner of newOwners$ | async">
     {{ owner.key }} : {{ owner.payload.val() }} :
@@ -21,3 +19,5 @@
     <button (click)="getInfo(owner)">INFO</button>
   </li>
 </ul>
+
+<input #owner type="text" (keyup.enter)="add(owner)" />

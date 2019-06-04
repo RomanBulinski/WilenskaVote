@@ -16,11 +16,9 @@ export class ResolutionComponent implements OnInit {
   buttonOn: boolean;
   owners: any[];
 
-  constructor(db: FirebaseRTDBService) {
+  constructor(private db: FirebaseRTDBService) {
     this.owners = db.getOwners();
   }
-
-  showDataFromChiled() {}
 
   ngOnInit() {}
 
@@ -36,6 +34,7 @@ export class ResolutionComponent implements OnInit {
   incrementVAgainst(value: any) {
     this.votesAgainst = this.votesAgainst + value;
   }
+
   decrementVAgainst(value: any) {
     this.votesAgainst = this.votesAgainst - value;
   }
@@ -53,5 +52,23 @@ export class ResolutionComponent implements OnInit {
 
   receiveButtonOn($event) {
     this.buttonOn = JSON.parse($event);
+  }
+
+  updateForActiv(owner) {
+    this.db.update(owner.fullname).update({
+      list_of_votes: { "2019_1": "for" }
+    });
+  }
+
+  updateAgainsActiv(owner) {
+    this.db.update(owner.fullname).update({
+      list_of_votes: { "2019_1": "against" }
+    });
+  }
+
+  updateAstentionActiv(owner) {
+    this.db.update(owner.fullname).update({
+      list_of_votes: { "2019_1": "astention" }
+    });
   }
 }
