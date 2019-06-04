@@ -1,7 +1,6 @@
 import { Component } from "@angular/core";
-// import { OwnersServiceService } from "./owners-service.service";
 import { AngularFireDatabase, AngularFireList } from "angularfire2/database";
-// import { Subscription } from "rxjs";
+import { Subscription } from "rxjs";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
 import { Key } from "protractor";
@@ -13,10 +12,6 @@ import { FirebaseRTDBService } from "../service/firebase-rtdb.service";
   styleUrls: ["./owners.component.scss"]
 })
 export class OwnersComponent {
-  // constructor(service: OwnersServiceService) {
-  //   this.owners = service.getOwners();
-  // }
-  // owners$;
   observable$: Observable<any[]>;
   owners$: AngularFireList<any>;
   owners: any[];
@@ -31,8 +26,13 @@ export class OwnersComponent {
     // this.owners$ = db.list("/");
     this.owners$ = db.getOwnersAngularFireList();
     this.owners = db.getOwners();
-    // this.observable$ = db.list("/").valueChanges();
+    this.observable$ = this.owners$.valueChanges();
+    // this.observable$ = db.list("/");
     // console.log(this.observable$);
+
+    // this.observable$ = this.owners$.snapshotChanges().map(changes => {
+    //   return changes.map(c => ({ key: c.payload.key, ...c.payload.val() }));
+    // });
 
     // db.list("/")
     //   .valueChanges()
@@ -48,7 +48,7 @@ export class OwnersComponent {
 
   add(owner: HTMLInputElement) {
     console.log("dodaje");
-    this.owners$.push({
+    this.owners$.set(owner.value, {
       // fullname: "gargamel",
       fullname: owner.value,
       key: owner.checked,
@@ -64,19 +64,32 @@ export class OwnersComponent {
   }
 
   update(owner) {
-    console.log("obiekt z bazy : " + owner.name);
-    // this.db.object(owner.fullname).update({
     this.db.object(owner.fullname).update({
-      fullname: owner.fullname + "zorro",
-      property: owner.property + "HURRA"
+      property: owner.property + "-------------"
     });
   }
 
   getInfo(owner) {
-    console.log("ovner xxxxx : " + Object.keys(owner));
+    // console.log(Object.keys(owner));
+    // console.log(Object.assign(owner));
+    // console.log(Object.values(owner));
+    console.log("============================");
+    // console.log("object from keys : " + Object.keys(owner));
     console.log("fullname : " + owner.fullname);
-    console.log("entries : " + Object.entries(owner));
-    console.log("values : " + Object.values(owner));
-    // console.log("seal : " + owner.payload.key);
+    console.log("============================");
+    // console.log(owner.getKey);
+    // console.log("entries : " + Object.entries(owner));
+    // console.log("values : " + Object.values(owner));
+    // this.owners.forEach(n => console.log(n.index));
+
+    // this.owners$.snapshotChanges().subscribe(owners => {
+    //   owners.forEach(owner => {
+    //     console.log("-----------------------------------");
+    //     console.log(owner.type);
+    //     console.log("klucz : " + owner.key);
+    //     console.log(owner.payload.val());
+    //     console.log("-----------------------------------");
+    //   });
+    // });
   }
 }

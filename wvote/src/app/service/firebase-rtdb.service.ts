@@ -27,7 +27,11 @@ export class FirebaseRTDBService {
     return this.owners$;
   }
 
-  object(text: string) {
-    return this.dibi.object(text);
+  tryObject() {
+    console.log(this.owners.keys());
+  }
+
+  object(ownerfullname: string) {
+    return this.dibi.object(ownerfullname);
   }
 }

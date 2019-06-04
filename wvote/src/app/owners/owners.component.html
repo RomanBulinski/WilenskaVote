@@ -16,6 +16,7 @@
 <ul>
   <li *ngFor="let owner of owners; let i = index">
     {{ owner.$value || i }} : {{ owner.fullname }} : {{ owner.property }}
+    {{ owner.key }}
     <button (click)="update(owner)">UPDATE</button>
     <button (click)="getInfo(owner)">INFO</button>
   </li>

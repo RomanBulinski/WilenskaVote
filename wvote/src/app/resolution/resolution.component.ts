@@ -14,11 +14,6 @@ export class ResolutionComponent implements OnInit {
   @ViewChild(MyButtonComponent) mybutton: MyButtonComponent;
   buttonId: string;
   buttonOn: boolean;
-
-  // constructor(service: OwnersServiceService) {
-  //   this.owners = service.getOwners();
-  // }
-
   owners: any[];
 
   constructor(db: FirebaseRTDBService) {

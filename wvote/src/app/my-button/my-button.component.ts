@@ -16,6 +16,12 @@ export class MyButtonComponent implements OnInit {
 
   ngOnInit() {}
 
+  allFunctions() {
+    this.changeColor();
+    this.sendButtonIDMessage();
+    this.sendButtonOnMessage();
+  }
+
   changeColor() {
     if (this.buttonOn == true) {
       this.buttonOn = false;
@@ -30,11 +36,5 @@ export class MyButtonComponent implements OnInit {
 
   sendButtonOnMessage() {
     this.messageEventON.emit(String(this.buttonOn));
-  }
-
-  allFunctions() {
-    this.sendButtonIDMessage();
-    this.sendButtonOnMessage();
-    this.changeColor();
   }
 }

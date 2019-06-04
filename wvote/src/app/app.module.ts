@@ -12,7 +12,7 @@ import { ResolutionComponent } from "./resolution/resolution.component";
 import { OwnersComponent } from "./owners/owners.component";
 
 import { FirebaseRTDBService } from "./service/firebase-rtdb.service";
-import { OwnersServiceService } from "./owners/owners-service.service";
+
 import { MyButtonComponent } from "./my-button/my-button.component";
 import { HttpClientModule } from "@angular/common/http";
 
@@ -42,7 +42,7 @@ import { ReactiveFormsModule } from "@angular/forms";
     AngularFireAuthModule,
     ReactiveFormsModule
   ],
-  providers: [OwnersServiceService, AngularFireModule, FirebaseRTDBService],
+  providers: [AngularFireModule, FirebaseRTDBService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
