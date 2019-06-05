@@ -18,6 +18,8 @@ export class FirebaseRTDBService {
       });
     this.owners$ = db.list("/");
     this.dibi = db;
+
+    // this.owners.forEach(n=>this.owners$.set(n.fullname,owner)
   }
 
   createOwner(_fullname, owner: Owner): void {

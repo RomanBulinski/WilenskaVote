@@ -22,28 +22,28 @@ export class ResolutionComponent implements OnInit {
 
   ngOnInit() {}
 
-  incrementVFor(value: any) {
-    this.votesFor = this.votesFor + value;
+  incrementVFor(value: number) {
+    this.votesFor = this.votesFor + Number(value);
     console.log(this.votesFor);
   }
 
-  decrementVFor(value: any) {
-    this.votesFor = this.votesFor - value;
+  decrementVFor(value: number) {
+    this.votesFor = this.votesFor - Number(value);
   }
 
-  incrementVAgainst(value: any) {
-    this.votesAgainst = this.votesAgainst + value;
+  incrementVAgainst(value: number) {
+    this.votesAgainst = this.votesAgainst + Number(value);
   }
 
-  decrementVAgainst(value: any) {
-    this.votesAgainst = this.votesAgainst - value;
+  decrementVAgainst(value: number) {
+    this.votesAgainst = this.votesAgainst - Number(value);
   }
 
-  incrementVAbstention(value: any) {
-    this.votesAbstention = this.votesAbstention + value;
+  incrementVAbstention(value: number) {
+    this.votesAbstention = this.votesAbstention + Number(value);
   }
-  decrementVAbstention(value: any) {
-    this.votesAbstention = this.votesAbstention - value;
+  decrementVAbstention(value: number) {
+    this.votesAbstention = this.votesAbstention - Number(value);
   }
 
   receiveButtonId($event) {
