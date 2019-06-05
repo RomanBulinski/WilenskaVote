@@ -1,7 +1,8 @@
 export class Owner {
-  fullname: string = "";
-  participation: string = "3000";
-  property: string = "Wilenska5/";
+  id: string;
+  fullname: string;
+  participation: string;
+  property: string;
   s: string = "/";
   total: string = "631842";
 }

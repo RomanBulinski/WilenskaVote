@@ -1,3 +1,4 @@
+import { map } from "rxjs/operators";
 import { Owner } from "./../owners/owner";
 import { Injectable } from "@angular/core";
 import { AngularFireDatabase, AngularFireList } from "angularfire2/database";
@@ -6,31 +7,38 @@ import { AngularFireDatabase, AngularFireList } from "angularfire2/database";
   providedIn: "root"
 })
 export class FirebaseRTDBService {
-  dibi: AngularFireDatabase;
   owners: any[];
   owners$: AngularFireList<Owner>;
+  ownerObservable: any[];
+  owner: Owner = new Owner();
 
-  constructor(db: AngularFireDatabase) {
+  constructor(public db: AngularFireDatabase) {
     db.list("/")
       .valueChanges()
       .subscribe(owners => {
         this.owners = owners;
       });
     this.owners$ = db.list("/");
-    this.dibi = db;
 
-    // this.owners.forEach(n=>this.owners$.set(n.fullname,owner)
+    db.list("/")
+      .valueChanges() // returns observable
+      .subscribe(list => {
+        this.ownerObservable = list;
+      });
+
+    console.log("jestme w costruktorze ");
   }
 
   createOwner(_fullname, owner: Owner): void {
     this.owners$.set(_fullname, owner);
-    this.dibi.object(_fullname).update({
+    this.db.object(_fullname).update({
       fullname: _fullname
     });
   }
 
-  update(ownerfullname: string) {
-    return this.dibi.object(ownerfullname);
+  getObjectForUpdate(id: string) {
+    console.log("call from firbase funkcja for update : ");
+    return this.db.object(id);
   }
 
   getOwners() {

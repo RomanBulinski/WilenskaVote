@@ -55,19 +55,22 @@ export class ResolutionComponent implements OnInit {
   }
 
   updateForActiv(owner) {
-    this.db.update(owner.fullname).update({
+    let tempObject = this.db.getObjectForUpdate(owner.id);
+    tempObject.update({
       list_of_votes: { "2019_1": "for" }
     });
   }
 
   updateAgainsActiv(owner) {
-    this.db.update(owner.fullname).update({
+    let tempObject = this.db.getObjectForUpdate(owner.id);
+    tempObject.update({
       list_of_votes: { "2019_1": "against" }
     });
   }
 
   updateAstentionActiv(owner) {
-    this.db.update(owner.fullname).update({
+    let tempObject = this.db.getObjectForUpdate(owner.id);
+    tempObject.update({
       list_of_votes: { "2019_1": "astention" }
     });
   }
