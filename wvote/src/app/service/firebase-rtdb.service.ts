@@ -2,6 +2,8 @@ import { map } from "rxjs/operators";
 import { Owner } from "./../owners/owner";
 import { Injectable } from "@angular/core";
 import { AngularFireDatabase, AngularFireList } from "angularfire2/database";
+import { Observable } from "rxjs";
+import { defineBase } from "@angular/core/src/render3";
 
 @Injectable({
   providedIn: "root"
@@ -47,7 +49,34 @@ export class FirebaseRTDBService {
     return this.owners$;
   }
 
-  getListOfVotesFromOwner(ownerId: string) {
-    return this.db.object(ownerId).valueChanges();
+  getAngularFireDatabase() {
+    return this.db;
+  }
+
+  getValueOfVote(ownerId: string, db: AngularFireDatabase) {
+    let result;
+    let itemsRef = db.list("/" + [ownerId] + "/list_of_votes");
+    itemsRef.snapshotChanges(["child_added"]).subscribe(actions => {
+      actions.forEach(action => {
+        // console.log(action.type);
+        // console.log(action.key);
+        // console.log(action.payload.val());
+        result = action.payload.val();
+      });
+    });
+    return result;
+  }
+
+  getInfo(ownerId: string) {
+    // let temp = this.db.object(ownerId).valueChanges();
+    // temp.forEach(n => console.log(n));
+    let itemsRef = this.db.list("/" + [ownerId] + "/list_of_votes");
+    itemsRef.snapshotChanges(["child_added"]).subscribe(actions => {
+      actions.forEach(action => {
+        console.log(action.type);
+        console.log(action.key);
+        console.log(action.payload.val());
+      });
+    });
   }
 }

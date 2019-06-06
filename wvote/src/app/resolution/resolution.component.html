@@ -30,6 +30,8 @@
         ></app-my-button>
       </div>
 
+      <button (click)="getValueOfVoteFromService(owner.id)"></button>
+
       <div class="row oneOwner">
         <app-my-button
           buttonID="against{{ owner.id }}"

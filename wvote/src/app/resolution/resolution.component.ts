@@ -2,6 +2,8 @@ import { Key } from "protractor";
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { MyButtonComponent } from "../my-button/my-button.component";
 import { FirebaseRTDBService } from "../service/firebase-rtdb.service";
+import { defineBase } from "@angular/core/src/render3";
+import { AngularFireDatabase, AngularFireList } from "angularfire2/database";
 
 @Component({
   selector: "app-resolution",
@@ -17,9 +19,11 @@ export class ResolutionComponent implements OnInit {
   buttonId: string;
   buttonOn: boolean;
   owners: any[];
+  objectOfBase: AngularFireDatabase;
 
   constructor(private db: FirebaseRTDBService) {
     this.owners = db.getOwners();
+    this.objectOfBase = db.getAngularFireDatabase();
   }
 
   ngOnInit() {}
@@ -67,13 +71,12 @@ export class ResolutionComponent implements OnInit {
       list_of_votes: { [this.idPoll]: "for" }
     });
     console.log(owner.list_of_votes);
+    tempObject.valueChanges();
   }
 
   updateAgainsActiv(owner) {
     let tempObject = this.db.getOwner(owner.id);
-    tempObject.update({
-      list_of_votes: { "2019_2": "against" }
-    });
+    tempObject.update({ list_of_votes: { "2019_2": "against" } });
   }
 
   updateAstentionActiv(owner) {
@@ -81,5 +84,10 @@ export class ResolutionComponent implements OnInit {
     tempObject.update({
       list_of_votes: { "2019_2": "astention" }
     });
+  }
+
+  getValueOfVoteFromService(owner) {
+    let valueOfVote = this.db.getValueOfVote(owner.id, this.objectOfBase);
+    console.log(valueOfVote);
   }
 }

@@ -47,17 +47,24 @@ export class OwnersComponent {
   }
 
   update(owner) {
-    this.db.getObject(owner.fullname).update({
+    this.db.getOwner(owner.fullname).update({
       list_of_votes: { "2019_1": "for", "2019_2": "against" }
     });
     console.log("try update !!!");
   }
 
+  getListOfVotes(owner) {
+    // console.log(this.db.getListOfVotesFromOwner(owner.id));
+  }
+
   getInfo(owner) {
+    console.log("============================");
+    this.db.getInfo(owner.id);
+
     // console.log(Object.keys(owner));
     // console.log(Object.assign(owner));
     // console.log(Object.values(owner));
-    console.log("============================");
+
     // console.log("object from keys : " + Object.keys(owner));
     console.log("fullname : " + owner.fullname);
     console.log("============================");
