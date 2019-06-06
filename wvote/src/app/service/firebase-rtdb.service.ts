@@ -25,8 +25,6 @@ export class FirebaseRTDBService {
       .subscribe(list => {
         this.ownerObservable = list;
       });
-
-    console.log("jestme w costruktorze ");
   }
 
   createOwner(_fullname, owner: Owner): void {
@@ -36,9 +34,9 @@ export class FirebaseRTDBService {
     });
   }
 
-  getObjectForUpdate(id: string) {
+  getOwner(ownerId: string) {
     console.log("call from firbase funkcja for update : ");
-    return this.db.object(id);
+    return this.db.object(ownerId);
   }
 
   getOwners() {
@@ -47,5 +45,9 @@ export class FirebaseRTDBService {
 
   getOwnersAngularFireList() {
     return this.owners$;
+  }
+
+  getListOfVotesFromOwner(ownerId: string) {
+    return this.db.object(ownerId).valueChanges();
   }
 }

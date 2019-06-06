@@ -1,4 +1,12 @@
-<h4>GŁOSOWANIE ZA UCHWAŁĄ NR ... w SPRAWIE ....</h4>
+<div>
+  <p class="row">
+    GŁOSOWANIE ZA UCHWAŁĄ NR :
+  </p>
+  <input class="row" type="text" (keyup.enter)="getPoll($event)" />
+  <p class="row">
+    w SPRAWIE ....
+  </p>
+</div>
 
 <ul>
   <li *ngFor="let owner of owners">

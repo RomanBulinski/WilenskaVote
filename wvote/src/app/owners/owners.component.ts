@@ -47,7 +47,7 @@ export class OwnersComponent {
   }
 
   update(owner) {
-    this.db.getObjectForUpdate(owner.fullname).update({
+    this.db.getObject(owner.fullname).update({
       list_of_votes: { "2019_1": "for", "2019_2": "against" }
     });
     console.log("try update !!!");

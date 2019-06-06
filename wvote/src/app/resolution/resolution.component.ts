@@ -1,3 +1,4 @@
+import { Key } from "protractor";
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { MyButtonComponent } from "../my-button/my-button.component";
 import { FirebaseRTDBService } from "../service/firebase-rtdb.service";
@@ -8,6 +9,7 @@ import { FirebaseRTDBService } from "../service/firebase-rtdb.service";
   styleUrls: ["./resolution.component.scss"]
 })
 export class ResolutionComponent implements OnInit {
+  idPoll: string = "nie podano poll id";
   votesFor: number = 0;
   votesAgainst: number = 0;
   votesAbstention: number = 0;
@@ -21,6 +23,11 @@ export class ResolutionComponent implements OnInit {
   }
 
   ngOnInit() {}
+
+  getPoll(event) {
+    const inputValue = event.target.value;
+    this.idPoll = inputValue;
+  }
 
   incrementVFor(value: number) {
     this.votesFor = this.votesFor + Number(value);
@@ -55,23 +62,24 @@ export class ResolutionComponent implements OnInit {
   }
 
   updateForActiv(owner) {
-    let tempObject = this.db.getObjectForUpdate(owner.id);
+    let tempObject = this.db.getOwner(owner.id);
     tempObject.update({
-      list_of_votes: { "2019_1": "for" }
+      list_of_votes: { [this.idPoll]: "for" }
     });
+    console.log(owner.list_of_votes);
   }
 
   updateAgainsActiv(owner) {
-    let tempObject = this.db.getObjectForUpdate(owner.id);
+    let tempObject = this.db.getOwner(owner.id);
     tempObject.update({
-      list_of_votes: { "2019_1": "against" }
+      list_of_votes: { "2019_2": "against" }
     });
   }
 
   updateAstentionActiv(owner) {
-    let tempObject = this.db.getObjectForUpdate(owner.id);
+    let tempObject = this.db.getOwner(owner.id);
     tempObject.update({
-      list_of_votes: { "2019_1": "astention" }
+      list_of_votes: { "2019_2": "astention" }
     });
   }
 }
