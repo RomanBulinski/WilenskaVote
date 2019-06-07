@@ -13,6 +13,7 @@ export class FirebaseRTDBService {
   owners$: AngularFireList<Owner>;
   ownerObservable: any[];
   owner: Owner = new Owner();
+  valueOfVot: string;
 
   constructor(public db: AngularFireDatabase) {
     db.list("/")
@@ -53,18 +54,20 @@ export class FirebaseRTDBService {
     return this.db;
   }
 
-  getValueOfVote(ownerId: string, db: AngularFireDatabase) {
+  getValueOfVote(ownerId: string) {
     let result;
-    let itemsRef = db.list("/" + [ownerId] + "/list_of_votes");
+    let itemsRef = this.db.list("/" + [ownerId] + "/list_of_votes");
     itemsRef.snapshotChanges(["child_added"]).subscribe(actions => {
       actions.forEach(action => {
         // console.log(action.type);
         // console.log(action.key);
-        // console.log(action.payload.val());
+        console.log("BBB z servisu : " + action.payload.val());
         result = action.payload.val();
+        console.log("typ z bazy : " + typeof result);
       });
     });
-    return result;
+
+    this.valueOfVot = result;
   }
 
   getInfo(ownerId: string) {

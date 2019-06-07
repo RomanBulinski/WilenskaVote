@@ -14,12 +14,15 @@
       <div>
         {{ owner.id }} :{{ owner.fullname }} : {{ owner.property }} :
         {{ owner.participation }}
+
+        +
       </div>
 
       <div class="row oneOwner">
         <app-my-button
           buttonID="for{{ owner.id }}"
           buttonLabel="for"
+          [buttonOn]="getValues(owner.list_of_votes)"
           (click)="
             buttonOn
               ? incrementVFor(owner.participation) + updateForActiv(owner)
@@ -30,12 +33,11 @@
         ></app-my-button>
       </div>
 
-      <button (click)="getValueOfVoteFromService(owner.id)"></button>
-
       <div class="row oneOwner">
         <app-my-button
           buttonID="against{{ owner.id }}"
           buttonLabel="against"
+          [buttonOn]="getValues(owner.list_of_votes)"
           (click)="
             buttonOn
               ? incrementVAgainst(owner.participation) +
@@ -51,6 +53,7 @@
         <app-my-button
           buttonID="abstention{{ owner.id }}"
           buttonLabel="abstention"
+          [buttonOn]="getValues(owner.list_of_votes)"
           (click)="
             buttonOn
               ? incrementVAbstention(owner.participation) +

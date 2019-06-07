@@ -6,8 +6,8 @@ import { Component, OnInit, Input, EventEmitter, Output } from "@angular/core";
   styleUrls: ["./my-button.component.scss"]
 })
 export class MyButtonComponent implements OnInit {
-  buttonOn: boolean = false;
-  // @Input() buttonOn: boolean;
+  // buttonOn: boolean = false;
+  @Input() buttonOn: boolean;
   @Input() buttonLabel: string;
   @Input() buttonID: string;
   @Output() messageEventID = new EventEmitter<string>();
