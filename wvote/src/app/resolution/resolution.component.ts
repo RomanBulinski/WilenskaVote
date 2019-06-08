@@ -23,7 +23,6 @@ export class ResolutionComponent implements OnInit {
   buttonOn: boolean = false;
   owners: any[];
   objectOfBase: AngularFireDatabase;
-  // list_of_votes: { any }[] = [];
 
   constructor(public db: FirebaseRTDBService) {
     this.owners = db.getOwners();
@@ -75,10 +74,6 @@ export class ResolutionComponent implements OnInit {
       list_of_votes: { [this.idPoll]: "true" }
     });
     tempObject.valueChanges();
-
-    // let temp = { [owner.id]: "for" };
-    // this.list_of_votes.push(temp);
-    // this.list_of_votes.forEach(n => console.log(n));
   }
 
   updateAgainsActiv(owner) {
@@ -96,11 +91,6 @@ export class ResolutionComponent implements OnInit {
   }
 
   getValueOfVoteFromService(owner) {
-    console.log("-------------------------");
-    console.log("AAA z resolutions  : " + this.db.getValueOfVote(owner.id));
-    console.log(
-      "AAA typ z resolutions : " + typeof this.db.getValueOfVote(owner.id)
-    );
     if (true) {
       this.buttonOn = true;
     } else {
@@ -121,11 +111,3 @@ export class ResolutionComponent implements OnInit {
     return false;
   }
 }
-
-// <div>
-// {{ owner.id }} :{{ owner.fullname }} : {{ owner.property }} :
-// {{ owner.participation }} :-: {{ getKeys(owner.list_of_votes) }} : :{{
-//   getValues(owner.list_of_votes)
-// }}
-// +
-// </div>

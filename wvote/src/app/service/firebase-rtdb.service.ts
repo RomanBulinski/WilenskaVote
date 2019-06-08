@@ -63,7 +63,6 @@ export class FirebaseRTDBService {
         // console.log(action.key);
         console.log("BBB z servisu : " + action.payload.val());
         result = action.payload.val();
-        console.log("typ z bazy : " + typeof result);
       });
     });
 
@@ -71,8 +70,6 @@ export class FirebaseRTDBService {
   }
 
   getInfo(ownerId: string) {
-    // let temp = this.db.object(ownerId).valueChanges();
-    // temp.forEach(n => console.log(n));
     let itemsRef = this.db.list("/" + [ownerId] + "/list_of_votes");
     itemsRef.snapshotChanges(["child_added"]).subscribe(actions => {
       actions.forEach(action => {
