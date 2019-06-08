@@ -36,28 +36,28 @@ export class ResolutionComponent implements OnInit {
     this.idPoll = inputValue;
   }
 
-  incrementVFor(value: number) {
-    this.votesFor = this.votesFor + Number(value);
-    console.log(this.votesFor);
+  increment(value: number, voteType: string) {
+    if (voteType == "for") {
+      this.votesFor = this.votesFor + Number(value);
+    }
+    if (voteType == "against") {
+      this.votesAgainst = this.votesAgainst + Number(value);
+    }
+    if (voteType == "abstention") {
+      this.votesAbstention = this.votesAbstention - Number(value);
+    }
   }
 
-  decrementVFor(value: number) {
-    this.votesFor = this.votesFor - Number(value);
-  }
-
-  incrementVAgainst(value: number) {
-    this.votesAgainst = this.votesAgainst + Number(value);
-  }
-
-  decrementVAgainst(value: number) {
-    this.votesAgainst = this.votesAgainst - Number(value);
-  }
-
-  incrementVAbstention(value: number) {
-    this.votesAbstention = this.votesAbstention + Number(value);
-  }
-  decrementVAbstention(value: number) {
-    this.votesAbstention = this.votesAbstention - Number(value);
+  decrement(value: number, voteType: string) {
+    if (voteType == "for") {
+      this.votesFor = this.votesFor - Number(value);
+    }
+    if (voteType == "against") {
+      this.votesAgainst = this.votesAgainst - Number(value);
+    }
+    if (voteType == "abstention") {
+      this.votesAbstention = this.votesAbstention - Number(value);
+    }
   }
 
   receiveButtonId($event) {
@@ -71,41 +71,33 @@ export class ResolutionComponent implements OnInit {
   updateForActiv(owner) {
     let tempObject = this.db.getOwner(owner.id);
     tempObject.update({
-      list_of_votes: { [this.idPoll]: "true" }
+      list_of_votes: { [this.idPoll]: "for" }
     });
     tempObject.valueChanges();
   }
 
   updateAgainsActiv(owner) {
     let tempObject = this.db.getOwner(owner.id);
-    tempObject.update({ list_of_votes: { "2019_2": "false" } });
+    tempObject.update({ list_of_votes: { [this.idPoll]: "against" } });
     tempObject.valueChanges();
   }
 
   updateAstentionActiv(owner) {
     let tempObject = this.db.getOwner(owner.id);
     tempObject.update({
-      list_of_votes: { "2019_2": "false" }
+      list_of_votes: { [this.idPoll]: "abstention" }
     });
     tempObject.valueChanges();
-  }
-
-  getValueOfVoteFromService(owner) {
-    if (true) {
-      this.buttonOn = true;
-    } else {
-      this.buttonOn = false;
-    }
   }
 
   getKeys(obj) {
     return Object.keys(obj);
   }
 
-  getValues(obj) {
+  getValues(obj, vote: string) {
     if (obj == undefined || obj == null) {
       return false;
-    } else if (Object.values(obj)[0] == "true") {
+    } else if (Object.values(obj)[0] == vote) {
       return true;
     }
     return false;

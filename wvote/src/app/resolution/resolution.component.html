@@ -14,19 +14,17 @@
       <div>
         {{ owner.id }} :{{ owner.fullname }} : {{ owner.property }} :
         {{ owner.participation }}
-
-        +
       </div>
 
       <div class="row oneOwner">
         <app-my-button
           buttonID="for{{ owner.id }}"
           buttonLabel="for"
-          [buttonOn]="getValues(owner.list_of_votes)"
+          [buttonOn]="getValues(owner.list_of_votes, 'for')"
           (click)="
             buttonOn
-              ? incrementVFor(owner.participation) + updateForActiv(owner)
-              : decrementVFor(owner.participation)
+              ? increment(owner.participation, 'for') + updateForActiv(owner)
+              : decrement(owner.participation, 'for')
           "
           (messageEventID)="receiveButtonId($event)"
           (messageEventON)="receiveButtonOn($event)"
@@ -37,12 +35,12 @@
         <app-my-button
           buttonID="against{{ owner.id }}"
           buttonLabel="against"
-          [buttonOn]="getValues(owner.list_of_votes)"
+          [buttonOn]="getValues(owner.list_of_votes, 'against')"
           (click)="
             buttonOn
-              ? incrementVAgainst(owner.participation) +
+              ? increment(owner.participation, 'against') +
                 updateAgainsActiv(owner)
-              : decrementVAgainst(owner.participation)
+              : decrement(owner.participation, 'against')
           "
           (messageEventID)="receiveButtonId($event)"
           (messageEventON)="receiveButtonOn($event)"
@@ -53,12 +51,12 @@
         <app-my-button
           buttonID="abstention{{ owner.id }}"
           buttonLabel="abstention"
-          [buttonOn]="getValues(owner.list_of_votes)"
+          [buttonOn]="getValues(owner.list_of_votes, 'abstention')"
           (click)="
             buttonOn
-              ? incrementVAbstention(owner.participation) +
+              ? increment(owner.participation, 'abstention') +
                 updateAstentionActiv(owner)
-              : decrementVAbstention(owner.participation)
+              : decrement(owner.participation, 'abstention')
           "
           (messageEventID)="receiveButtonId($event)"
           (messageEventON)="receiveButtonOn($event)"
