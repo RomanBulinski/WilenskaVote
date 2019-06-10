@@ -19,7 +19,7 @@ export class ResolutionComponent implements OnInit {
   votesFor: number = 0;
   votesAgainst: number = 0;
   votesAbstention: number = 0;
-  @ViewChild(MyButtonComponent) mybutton: MyButtonComponent;
+  // @ViewChild(MyButtonComponent) mybutton: MyButtonComponent;
   buttonId: string;
   buttonOn: boolean = false;
 
@@ -37,6 +37,26 @@ export class ResolutionComponent implements OnInit {
     this.objectOfBase = db.getAngularFireDatabase();
   }
 
+  receiveFor($event) {
+    this.votesFor = this.votesFor + JSON.parse($event);
+  }
+  receiveAgainst($event) {
+    this.votesAgainst = this.votesAgainst + JSON.parse($event);
+  }
+  receiveAbstetion($event) {
+    this.votesAbstention = this.votesAbstention + JSON.parse($event);
+  }
+
+  receiveForMinus($event) {
+    this.votesFor = this.votesFor - JSON.parse($event);
+  }
+  receiveAgainstMinus($event) {
+    this.votesAgainst = this.votesAgainst - JSON.parse($event);
+  }
+  receiveAbstetionMinus($event) {
+    this.votesAbstention = this.votesAbstention - JSON.parse($event);
+  }
+
   ngOnInit() {
     this.data.currentMessage.subscribe(message => (this.message = message));
   }
@@ -46,29 +66,29 @@ export class ResolutionComponent implements OnInit {
     this.idPoll = inputValue;
   }
 
-  increment(value: number, voteType: string) {
-    if (voteType == "for") {
-      this.votesFor = this.votesFor + Number(value);
-    }
-    if (voteType == "against") {
-      this.votesAgainst = this.votesAgainst + Number(value);
-    }
-    if (voteType == "abstention") {
-      this.votesAbstention = this.votesAbstention + Number(value);
-    }
-  }
+  // increment(value: number, voteType: string) {
+  //   if (voteType == "for") {
+  //     this.votesFor = this.votesFor + Number(value);
+  //   }
+  //   if (voteType == "against") {
+  //     this.votesAgainst = this.votesAgainst + Number(value);
+  //   }
+  //   if (voteType == "abstention") {
+  //     this.votesAbstention = this.votesAbstention + Number(value);
+  //   }
+  // }
 
-  decrement(value: number, voteType: string) {
-    if (voteType == "for") {
-      this.votesFor = this.votesFor - Number(value);
-    }
-    if (voteType == "against") {
-      this.votesAgainst = this.votesAgainst - Number(value);
-    }
-    if (voteType == "abstention") {
-      this.votesAbstention = this.votesAbstention - Number(value);
-    }
-  }
+  // decrement(value: number, voteType: string) {
+  //   if (voteType == "for") {
+  //     this.votesFor = this.votesFor - Number(value);
+  //   }
+  //   if (voteType == "against") {
+  //     this.votesAgainst = this.votesAgainst - Number(value);
+  //   }
+  //   if (voteType == "abstention") {
+  //     this.votesAbstention = this.votesAbstention - Number(value);
+  //   }
+  // }
 
   receiveButtonId($event) {
     this.buttonId = $event;
@@ -98,4 +118,64 @@ export class ResolutionComponent implements OnInit {
     }
     return false;
   }
+
+  getList(obj) {
+    if (obj == undefined || obj == null) {
+      return false;
+    } else {
+      return obj;
+    }
+  }
 }
+
+// <div class="row oneOwner">
+// <app-my-button
+//   ownerId="{{ owner.id }}"
+//   buttonID="for{{ owner.id }}"
+//   buttonLabel="for"
+//   [buttonOn]="getValues(owner.list_of_votes, 'for')"
+//   (click)="
+//     buttonOn
+//       ? increment(owner.participation, 'for') +
+//         updateListOfVotes(owner, 'for')
+//       : decrement(owner.participation, 'for')
+//   "
+//   (messageEventID)="receiveButtonId($event)"
+//   (messageEventON)="receiveButtonOn($event)"
+// ></app-my-button>
+// </div>
+
+// <div class="row oneOwner">
+// <app-my-button
+//   ownerId="{{ owner.id }}"
+//   buttonID="against{{ owner.id }}"
+//   buttonLabel="against"
+//   [buttonOn]="getValues(owner.list_of_votes, 'against')"
+//   (click)="
+//     buttonOn
+//       ? increment(owner.participation, 'against') +
+//         updateListOfVotes(owner, 'against')
+//       : decrement(owner.participation, 'against')
+//   "
+//   (messageEventID)="receiveButtonId($event)"
+//   (messageEventON)="receiveButtonOn($event)"
+// ></app-my-button>
+// </div>
+
+// <div class="row oneOwner">
+// <app-my-button
+//   ownerId="{{ owner.id }}"
+//   buttonID="abstention{{ owner.id }}"
+//   buttonLabel="abstention"
+//   [buttonOn]="getValues(owner.list_of_votes, 'abstention')"
+//   (click)="
+//     buttonOn
+//       ? increment(owner.participation, 'abstention') +
+//         updateListOfVotes(owner, 'abstention')
+//       : decrement(owner.participation, 'abstention')
+//   "
+//   (messageEventID)="receiveButtonId($event)"
+//   (messageEventON)="receiveButtonOn($event)"
+// ></app-my-button>
+
+// </div>

@@ -11,58 +11,19 @@
 <ul>
   <li *ngFor="let owner of owners">
     <div>
-      <app-box-ofbutton></app-box-ofbutton>
+      Wilenska : {{ owner.property }}. udział : {{ owner.participation }}
 
-      <div class="row oneOwner">
-        <app-my-button
-          ownerId="{{ owner.id }}"
-          buttonID="for{{ owner.id }}"
-          buttonLabel="for"
-          [buttonOn]="getValues(owner.list_of_votes, 'for')"
-          (click)="
-            buttonOn
-              ? increment(owner.participation, 'for') +
-                updateListOfVotes(owner, 'for')
-              : decrement(owner.participation, 'for')
-          "
-          (messageEventID)="receiveButtonId($event)"
-          (messageEventON)="receiveButtonOn($event)"
-        ></app-my-button>
-      </div>
-
-      <div class="row oneOwner">
-        <app-my-button
-          ownerId="{{ owner.id }}"
-          buttonID="against{{ owner.id }}"
-          buttonLabel="against"
-          [buttonOn]="getValues(owner.list_of_votes, 'against')"
-          (click)="
-            buttonOn
-              ? increment(owner.participation, 'against') +
-                updateListOfVotes(owner, 'against')
-              : decrement(owner.participation, 'against')
-          "
-          (messageEventID)="receiveButtonId($event)"
-          (messageEventON)="receiveButtonOn($event)"
-        ></app-my-button>
-      </div>
-
-      <div class="row oneOwner">
-        <app-my-button
-          ownerId="{{ owner.id }}"
-          buttonID="abstention{{ owner.id }}"
-          buttonLabel="abstention"
-          [buttonOn]="getValues(owner.list_of_votes, 'abstention')"
-          (click)="
-            buttonOn
-              ? increment(owner.participation, 'abstention') +
-                updateListOfVotes(owner, 'abstention')
-              : decrement(owner.participation, 'abstention')
-          "
-          (messageEventID)="receiveButtonId($event)"
-          (messageEventON)="receiveButtonOn($event)"
-        ></app-my-button>
-      </div>
+      <app-box-ofbutton
+        [listOfVOtes]="getList(owner.list_of_votes)"
+        (messageEventVotesFor)="receiveFor($event)"
+        (messageEventVotesAgainst)="receiveAgainst($event)"
+        (messageEventVotesAbstention)="receiveAbstetion($event)"
+        (messageEventVotesForMinus)="receiveForMinus($event)"
+        (messageEventVotesAgainstMinus)="receiveAgainstMinus($event)"
+        (messageEventVotesAbstentionMinus)="receiveAbstetionMinus($event)"
+        participation="{{ owner.participation }}"
+        id="{{ owner.id }}"
+      ></app-box-ofbutton>
     </div>
   </li>
 </ul>
