@@ -38,7 +38,6 @@ export class FirebaseRTDBService {
   }
 
   getOwner(ownerId: string) {
-    console.log("call from firbase funkcja for update : ");
     return this.db.object(ownerId);
   }
 

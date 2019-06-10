@@ -21,6 +21,8 @@ import { AngularFireModule } from "angularfire2";
 import { AngularFireDatabaseModule } from "angularfire2/database";
 
 import { ReactiveFormsModule } from "@angular/forms";
+import { BoxOfbuttonComponent } from './box-ofbutton/box-ofbutton.component';
+import { Mybutton2Component } from './mybutton2/mybutton2.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,9 @@ import { ReactiveFormsModule } from "@angular/forms";
     AboutComponent,
     ResolutionComponent,
     OwnersComponent,
-    MyButtonComponent
+    MyButtonComponent,
+    BoxOfbuttonComponent,
+    Mybutton2Component
   ],
   imports: [
     BrowserModule,

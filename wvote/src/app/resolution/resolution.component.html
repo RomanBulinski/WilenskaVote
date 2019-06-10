@@ -11,19 +11,18 @@
 <ul>
   <li *ngFor="let owner of owners">
     <div>
-      <div>
-        {{ owner.id }} :{{ owner.fullname }} : {{ owner.property }} :
-        {{ owner.participation }}
-      </div>
+      <app-box-ofbutton></app-box-ofbutton>
 
       <div class="row oneOwner">
         <app-my-button
+          ownerId="{{ owner.id }}"
           buttonID="for{{ owner.id }}"
           buttonLabel="for"
           [buttonOn]="getValues(owner.list_of_votes, 'for')"
           (click)="
             buttonOn
-              ? increment(owner.participation, 'for') + updateForActiv(owner)
+              ? increment(owner.participation, 'for') +
+                updateListOfVotes(owner, 'for')
               : decrement(owner.participation, 'for')
           "
           (messageEventID)="receiveButtonId($event)"
@@ -33,13 +32,14 @@
 
       <div class="row oneOwner">
         <app-my-button
+          ownerId="{{ owner.id }}"
           buttonID="against{{ owner.id }}"
           buttonLabel="against"
           [buttonOn]="getValues(owner.list_of_votes, 'against')"
           (click)="
             buttonOn
               ? increment(owner.participation, 'against') +
-                updateAgainsActiv(owner)
+                updateListOfVotes(owner, 'against')
               : decrement(owner.participation, 'against')
           "
           (messageEventID)="receiveButtonId($event)"
@@ -49,13 +49,14 @@
 
       <div class="row oneOwner">
         <app-my-button
+          ownerId="{{ owner.id }}"
           buttonID="abstention{{ owner.id }}"
           buttonLabel="abstention"
           [buttonOn]="getValues(owner.list_of_votes, 'abstention')"
           (click)="
             buttonOn
               ? increment(owner.participation, 'abstention') +
-                updateAstentionActiv(owner)
+                updateListOfVotes(owner, 'abstention')
               : decrement(owner.participation, 'abstention')
           "
           (messageEventID)="receiveButtonId($event)"

@@ -6,6 +6,7 @@ import { defineBase } from "@angular/core/src/render3";
 import { AngularFireDatabase, AngularFireList } from "angularfire2/database";
 import { isUndefined, isNull } from "util";
 import { extendsDirectlyFromObject } from "@angular/core/src/render3/jit/directive";
+import { DataserviceService } from "../servicedata/dataservice.service";
 
 @Component({
   selector: "app-resolution",
@@ -21,15 +22,24 @@ export class ResolutionComponent implements OnInit {
   @ViewChild(MyButtonComponent) mybutton: MyButtonComponent;
   buttonId: string;
   buttonOn: boolean = false;
+
   owners: any[];
   objectOfBase: AngularFireDatabase;
 
-  constructor(public db: FirebaseRTDBService) {
+  message: string;
+  // message: [];
+
+  constructor(
+    public db: FirebaseRTDBService,
+    private data: DataserviceService
+  ) {
     this.owners = db.getOwners();
     this.objectOfBase = db.getAngularFireDatabase();
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.data.currentMessage.subscribe(message => (this.message = message));
+  }
 
   getPoll(event) {
     const inputValue = event.target.value;
@@ -44,7 +54,7 @@ export class ResolutionComponent implements OnInit {
       this.votesAgainst = this.votesAgainst + Number(value);
     }
     if (voteType == "abstention") {
-      this.votesAbstention = this.votesAbstention - Number(value);
+      this.votesAbstention = this.votesAbstention + Number(value);
     }
   }
 
@@ -68,30 +78,16 @@ export class ResolutionComponent implements OnInit {
     this.buttonOn = JSON.parse($event);
   }
 
-  updateForActiv(owner) {
+  updateListOfVotes(owner, voteType: string) {
     let tempObject = this.db.getOwner(owner.id);
     tempObject.update({
-      list_of_votes: { [this.idPoll]: "for" }
+      list_of_votes: { [this.idPoll]: voteType }
     });
     tempObject.valueChanges();
   }
 
-  updateAgainsActiv(owner) {
-    let tempObject = this.db.getOwner(owner.id);
-    tempObject.update({ list_of_votes: { [this.idPoll]: "against" } });
-    tempObject.valueChanges();
-  }
-
-  updateAstentionActiv(owner) {
-    let tempObject = this.db.getOwner(owner.id);
-    tempObject.update({
-      list_of_votes: { [this.idPoll]: "abstention" }
-    });
-    tempObject.valueChanges();
-  }
-
-  getKeys(obj) {
-    return Object.keys(obj);
+  getKeys(owner) {
+    return Object.keys(owner);
   }
 
   getValues(obj, vote: string) {
