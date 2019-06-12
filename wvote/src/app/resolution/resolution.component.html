@@ -1,28 +1,40 @@
 <div>
+  <p>RESOLUTIONS:</p>
+
+  <ul>
+    <li *ngFor="let id of iDsOfvotes">
+      <button (click)="setPoll(id)">
+        {{ id }}
+      </button>
+    </li>
+  </ul>
+
   <p class="row">
-    GŁOSOWANIE ZA UCHWAŁĄ NR :
+    VOTE FOR RESOLUTION No.:
   </p>
   <input class="row" type="text" (keyup.enter)="getPoll($event)" />
   <p class="row">
-    w SPRAWIE ....
+    .....
   </p>
 </div>
 
 <ul>
   <li *ngFor="let owner of owners">
     <div>
-      Wilenska : {{ owner.property }}. udział : {{ owner.participation }}
+      Wilenska : {{ owner.property }}. participation : {{ owner.participation }}
 
       <app-box-ofbutton
+        [idPoll]="idPoll"
         [listOfVOtes]="getList(owner.list_of_votes)"
+        participation="{{ owner.participation }}"
+        id="{{ owner.id }}"
         (messageEventVotesFor)="receiveFor($event)"
         (messageEventVotesAgainst)="receiveAgainst($event)"
         (messageEventVotesAbstention)="receiveAbstetion($event)"
         (messageEventVotesForMinus)="receiveForMinus($event)"
         (messageEventVotesAgainstMinus)="receiveAgainstMinus($event)"
         (messageEventVotesAbstentionMinus)="receiveAbstetionMinus($event)"
-        participation="{{ owner.participation }}"
-        id="{{ owner.id }}"
+        (messageEventIdVotesList)="receiveIdVotesList($event)"
       ></app-box-ofbutton>
     </div>
   </li>

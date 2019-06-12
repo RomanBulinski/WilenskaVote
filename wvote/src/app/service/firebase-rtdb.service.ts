@@ -78,4 +78,21 @@ export class FirebaseRTDBService {
       });
     });
   }
+
+  getListOfVOtes(ownerId: string) {
+    let list = [];
+    let itemsRef = this.db.list("/" + [ownerId] + "/list_of_votes");
+    itemsRef.snapshotChanges(["child_added"]).subscribe(actions => {
+      actions.forEach(action => {
+        // console.log(action.type);
+        // console.log(action.key);
+        // console.log(action.payload.val());
+        let tempObject = {};
+        tempObject[action.key] = action.payload.val();
+        list.push(tempObject);
+      });
+    });
+    console.log(list);
+    return list;
+  }
 }

@@ -19,9 +19,13 @@ export class BoxOfbuttonComponent implements OnInit {
   votesAgainstMinus: number = 0;
   votesAbstentionMinus: number = 0;
 
+  idVotesList: string[];
+
   @Input() participation: number;
   @Input() id: string;
   @Input() listOfVOtes;
+  @Input() idPoll;
+  // idPoll: string = "2000";
 
   @Output() messageEventVotesFor = new EventEmitter<string>();
   @Output() messageEventVotesAgainst = new EventEmitter<string>();
@@ -31,9 +35,10 @@ export class BoxOfbuttonComponent implements OnInit {
   @Output() messageEventVotesAgainstMinus = new EventEmitter<string>();
   @Output() messageEventVotesAbstentionMinus = new EventEmitter<string>();
 
+  @Output() messageEventIdVotesList = new EventEmitter<string>();
+
   owners: any[];
   objectOfBase: AngularFireDatabase;
-  idPoll: string = "2000";
 
   constructor(public db: FirebaseRTDBService) {
     this.owners = db.getOwners();
@@ -41,26 +46,74 @@ export class BoxOfbuttonComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getValueOfVote("for");
-    this.getValueOfVote("against");
-    this.getValueOfVote("abstention");
+    this.setSwitcher("for");
+    this.setSwitcher("against");
+    this.setSwitcher("abstention");
+    this.getIdVotesListFromOwner();
+    // let idVotesList = String(this.idVotesList.join(" "));
+    this.sendidVotesList();
   }
 
-  getValueOfVote(vote: string) {
+  setSwitcher(vote: string) {
     if (this.listOfVOtes == undefined || this.listOfVOtes == null) {
-      console.log("ther is no list of votes");
     } else if (Object.values(this.listOfVOtes)[0] == vote) {
       this.switcher[vote] = true;
     }
   }
 
-  updateListOfVotes(voteType: string) {
-    let tempObject = this.db.getOwner(this.id);
-    tempObject.update({
-      list_of_votes: { [this.idPoll]: voteType }
-    });
-    tempObject.valueChanges();
+  onClickMe(voteType: string) {
+    if (this.getFromSwitcherValueByKey(voteType) == false) {
+      this.switchButtons(voteType);
+      this.increment(voteType);
+      this.updateListOfVotes(this.idPoll, voteType);
+      if (voteType == "for") {
+        this.sendButtonVotesFor();
+      }
+      if (voteType == "against") {
+        this.sendButtonVotesAgainst();
+      }
+      if (voteType == "abstention") {
+        this.sendButtonvotesAbstention();
+      }
+    } else if (this.getFromSwitcherValueByKey(voteType) == true) {
+      this.switchButtonOFF(voteType);
+      this.decrement(voteType);
+      this.delateList();
+      if (voteType == "for") {
+        this.sendButtonVotesForMinus();
+      }
+      if (voteType == "against") {
+        this.sendButtonVotesAgainstMinus();
+      }
+      if (voteType == "abstention") {
+        this.sendButtonvotesAbstentionMinus();
+      }
+    }
   }
+
+  updateListOfVotes(voteId: string, voteType: string) {
+    var newList = {};
+    if (this.listOfVOtes == false) {
+      newList[voteId] = voteType;
+    } else {
+      newList = this.listOfVOtes;
+      newList[voteId] = voteType;
+    }
+    let owner = this.db.getOwner(this.id);
+    owner.update({
+      list_of_votes: newList
+      // list_of_votes: { [this.idPoll]: voteType, "2011": voteType }
+    });
+    owner.valueChanges();
+  }
+
+  getIdVotesListFromOwner() {
+    this.idVotesList = Object.keys(this.listOfVOtes);
+  }
+
+  // getListOfVotes() {
+  //   this.db.getListOfVOtes(this.id);
+  // }
 
   delateList() {
     let tempObject = this.db.getOwner(this.id + "/list_of_votes/");
@@ -89,6 +142,10 @@ export class BoxOfbuttonComponent implements OnInit {
     );
   }
 
+  sendidVotesList() {
+    this.messageEventIdVotesList.emit(String(this.idVotesList.join(" ")));
+  }
+
   increment(voteType: string) {
     if (voteType == "for") {
       this.votesFor = Number(this.participation);
@@ -113,60 +170,23 @@ export class BoxOfbuttonComponent implements OnInit {
     }
   }
 
-  getValueByKey(key) {
+  getFromSwitcherValueByKey(key) {
     return this.switcher[key];
   }
 
   switchButtons(voteType: string) {
     if (voteType == "for") {
-      this.switcher.for = true;
-      this.switcher.against = false;
-      this.switcher.abstention = false;
+      this.switcher = { for: true, against: false, abstention: false };
     }
     if (voteType == "against") {
-      this.switcher.for = false;
-      this.switcher.against = true;
-      this.switcher.abstention = false;
+      this.switcher = { for: false, against: true, abstention: false };
     }
     if (voteType == "abstention") {
-      this.switcher.for = false;
-      this.switcher.against = false;
-      this.switcher.abstention = true;
+      this.switcher = { for: false, against: false, abstention: true };
     }
   }
 
   switchButtonOFF(voteType: string) {
     this.switcher[voteType] = false;
-  }
-
-  onClickMe(voteType: string) {
-    if (this.getValueByKey(voteType) == false) {
-      this.switchButtons(voteType);
-      this.increment(voteType);
-      this.updateListOfVotes(voteType);
-      if (voteType == "for") {
-        this.sendButtonVotesFor();
-      }
-      if (voteType == "against") {
-        this.sendButtonVotesAgainst();
-      }
-      if (voteType == "abstention") {
-        this.sendButtonvotesAbstention();
-      }
-    } else if (this.getValueByKey(voteType) == true) {
-      this.switchButtonOFF(voteType);
-      this.decrement(voteType);
-      this.delateList();
-      if (voteType == "for") {
-        console.log(this.votesForMinus);
-        this.sendButtonVotesForMinus();
-      }
-      if (voteType == "against") {
-        this.sendButtonVotesAgainstMinus();
-      }
-      if (voteType == "abstention") {
-        this.sendButtonvotesAbstentionMinus();
-      }
-    }
   }
 }

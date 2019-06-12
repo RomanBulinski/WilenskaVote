@@ -13,7 +13,7 @@ import { OwnersComponent } from "./owners/owners.component";
 
 import { FirebaseRTDBService } from "./service/firebase-rtdb.service";
 
-import { MyButtonComponent } from "./my-button/my-button.component";
+// import { MyButtonComponent } from "./my-button/my-button.component";
 import { HttpClientModule } from "@angular/common/http";
 
 import { AngularFireAuthModule } from "angularfire2/auth";
@@ -21,8 +21,8 @@ import { AngularFireModule } from "angularfire2";
 import { AngularFireDatabaseModule } from "angularfire2/database";
 
 import { ReactiveFormsModule } from "@angular/forms";
-import { BoxOfbuttonComponent } from './box-ofbutton/box-ofbutton.component';
-import { Mybutton2Component } from './mybutton2/mybutton2.component';
+import { BoxOfbuttonComponent } from "./box-ofbutton/box-ofbutton.component";
+import { Mybutton2Component } from "./mybutton2/mybutton2.component";
 
 @NgModule({
   declarations: [
@@ -33,7 +33,7 @@ import { Mybutton2Component } from './mybutton2/mybutton2.component';
     AboutComponent,
     ResolutionComponent,
     OwnersComponent,
-    MyButtonComponent,
+    // MyButtonComponent,
     BoxOfbuttonComponent,
     Mybutton2Component
   ],

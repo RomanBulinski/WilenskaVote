@@ -3,21 +3,21 @@
     <app-mybutton2
       (click)="onClickMe('for')"
       buttonLabel="for"
-      [buttonOn]="getValueByKey('for')"
+      [buttonOn]="getFromSwitcherValueByKey('for')"
     ></app-mybutton2>
   </div>
   <div class="row oneOwner">
     <app-mybutton2
       (click)="onClickMe('against')"
       buttonLabel="against"
-      [buttonOn]="getValueByKey('against')"
+      [buttonOn]="getFromSwitcherValueByKey('against')"
     ></app-mybutton2>
   </div>
   <div class="row oneOwner">
     <app-mybutton2
       (click)="onClickMe('abstention')"
       buttonLabel="abstention"
-      [buttonOn]="getValueByKey('abstention')"
+      [buttonOn]="getFromSwitcherValueByKey('abstention')"
     ></app-mybutton2>
   </div>
 </div>

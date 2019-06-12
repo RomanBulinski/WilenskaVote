@@ -1,12 +1,8 @@
-import { Key } from "protractor";
 import { Component, OnInit, ViewChild } from "@angular/core";
-import { MyButtonComponent } from "../my-button/my-button.component";
 import { FirebaseRTDBService } from "../service/firebase-rtdb.service";
-import { defineBase } from "@angular/core/src/render3";
 import { AngularFireDatabase, AngularFireList } from "angularfire2/database";
-import { isUndefined, isNull } from "util";
-import { extendsDirectlyFromObject } from "@angular/core/src/render3/jit/directive";
 import { DataserviceService } from "../servicedata/dataservice.service";
+import { STRING_TYPE } from "@angular/compiler/src/output/output_ast";
 
 @Component({
   selector: "app-resolution",
@@ -15,19 +11,18 @@ import { DataserviceService } from "../servicedata/dataservice.service";
 })
 export class ResolutionComponent implements OnInit {
   objectKeys = Object.keys;
-  idPoll: string = "2000";
-
+  idPoll: string = "give_the_year";
   votesFor: number = 0;
   votesAgainst: number = 0;
   votesAbstention: number = 0;
-
   total = 631842;
-  // @ViewChild(MyButtonComponent) mybutton: MyButtonComponent;
   buttonId: string;
   buttonOn: boolean = false;
-
   owners: any[];
   objectOfBase: AngularFireDatabase;
+
+  iDsOfvotes = new Set();
+  // iDsOfvotesString: string = "";
 
   message: string;
   // message: [];
@@ -92,38 +87,30 @@ export class ResolutionComponent implements OnInit {
       this.votesAbstention - (100 * JSON.parse($event)) / this.total;
   }
 
+  receiveIdVotesList($event) {
+    if ($event != null || $event != undefined) {
+      let splitted = $event.split(" ");
+      for (let i = 0; i < splitted.length; i++) {
+        if (splitted[i] != " ") {
+          this.iDsOfvotes.add(splitted[i]);
+        }
+      }
+    }
+    this.setToString();
+  }
+
+  setToString() {
+    this.iDsOfvotesString = Array.from(this.iDsOfvotes).join(" ");
+  }
+
   getPoll(event) {
     const inputValue = event.target.value;
     this.idPoll = inputValue;
   }
 
-  receiveButtonId($event) {
-    this.buttonId = $event;
-  }
-
-  receiveButtonOn($event) {
-    this.buttonOn = JSON.parse($event);
-  }
-
-  updateListOfVotes(owner, voteType: string) {
-    let tempObject = this.db.getOwner(owner.id);
-    tempObject.update({
-      list_of_votes: { [this.idPoll]: voteType }
-    });
-    tempObject.valueChanges();
-  }
-
-  getKeys(owner) {
-    return Object.keys(owner);
-  }
-
-  getValues(obj, vote: string) {
-    if (obj == undefined || obj == null) {
-      return false;
-    } else if (Object.values(obj)[0] == vote) {
-      return true;
-    }
-    return false;
+  setPoll(ele) {
+    this.idPoll = ele;
+    console.log(this.idPoll);
   }
 
   getList(obj) {
