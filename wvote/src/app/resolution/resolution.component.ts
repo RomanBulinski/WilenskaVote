@@ -112,11 +112,6 @@ export class ResolutionComponent implements OnInit {
   setPoll(ele) {
     this.idPoll = ele;
     console.log(this.idPoll);
-    // if ((this.idPollIsChange = false)) {
-    //   this.idPollIsChange = true;
-    // } else if ((this.idPollIsChange = true)) {
-    //   this.idPollIsChange = false;
-    // }
   }
 
   getList(obj) {

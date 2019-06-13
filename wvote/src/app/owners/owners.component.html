@@ -1,22 +1,16 @@
-<h4>LISTA WŁAŚCICIELI</h4>
+<h4>OWNERS</h4>
 
-<!-- <ul>
-  <li *ngFor="let owner of newOwners$ | async">
-    {{ owner.key }} : {{ owner.payload.val() }} :
-
-    {{ owner.payload.key }}
-
-    <button (click)="update(owner)">UPDATE</button>
-    <button (click)="getInfo(owner)">INFO</button>
-  </li>
-</ul> -->
+<
+<div>
+  <div [innerHTML]="listOfVOtes"></div>
+</div>
 
 <ul>
   <li *ngFor="let owner of owners; let i = index">
     {{ owner.$value || i }} : {{ owner.fullname }} : {{ owner.property }}
-    {{ owner.key }}
-    <button (click)="update(owner)">UPDATE</button>
+
     <button (click)="getInfo(owner)">INFO</button>
+    <button (click)="getVotes(owner.list_of_votes)">GET VOTES</button>
   </li>
 </ul>
 

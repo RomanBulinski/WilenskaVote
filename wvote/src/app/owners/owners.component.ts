@@ -18,6 +18,7 @@ export class OwnersComponent {
   owners: any[];
   newOwners$: any;
   owner: Owner = new Owner();
+  listOfVOtes;
 
   constructor(private db: FirebaseRTDBService) {
     this.owners$ = db.getOwnersAngularFireList();
@@ -25,37 +26,26 @@ export class OwnersComponent {
     this.observable$ = this.owners$.valueChanges();
   }
 
-  // add2(owner: HTMLInputElement) {
-  //   console.log("dodaje");
-  //   this.owners$.set(owner.value, {
-  //     // fullname: "gargamel",
-  //     fullname: owner.value,
-  //     key: owner.checked,
-  //     price: 150,
-  //     isLive: true,
-  //     sections: [
-  //       { title: "Compoenentsssss" },
-  //       { title: "Directives" },
-  //       { title: "TEmplate" }
-  //     ]
-  //   });
-  //   owner.value = "AAA";
-  // }
   add(owner: HTMLInputElement) {
     this.db.createOwner(owner.value, this.owner);
     owner.value = "dodane";
   }
 
-  update(owner) {
-    this.db.getOwner(owner.fullname).update({
-      list_of_votes: { "2019_1": "for", "2019_2": "against" }
-    });
-    console.log("try update !!!");
+  getVotes(data) {
+    let temp = "";
+    let tempkeys = Object.keys(data);
+    for (let i = 0; i < tempkeys.length; i++) {
+      temp = temp + tempkeys[i] + " : " + data[tempkeys[i]] + "<br>";
+    }
+    this.listOfVOtes = temp;
   }
 
-  getListOfVotes(owner) {
-    // console.log(this.db.getListOfVotesFromOwner(owner.id));
-  }
+  // update(owner) {
+  //   this.db.getOwner(owner.fullname).update({
+  //     list_of_votes: { "2019_1": "for", "2019_2": "against" }
+  //   });
+  //   console.log("try update !!!");
+  // }
 
   getInfo(owner) {
     console.log("============================");
@@ -83,4 +73,21 @@ export class OwnersComponent {
     //   });
     // });
   }
+
+  // add2(owner: HTMLInputElement) {
+  //   console.log("dodaje");
+  //   this.owners$.set(owner.value, {
+  //     // fullname: "gargamel",
+  //     fullname: owner.value,
+  //     key: owner.checked,
+  //     price: 150,
+  //     isLive: true,
+  //     sections: [
+  //       { title: "Compoenentsssss" },
+  //       { title: "Directives" },
+  //       { title: "TEmplate" }
+  //     ]
+  //   });
+  //   owner.value = "AAA";
+  // }
 }
