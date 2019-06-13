@@ -54,11 +54,28 @@ export class BoxOfbuttonComponent implements OnInit {
     this.sendidVotesList();
   }
 
+  ngOnChanges() {
+    console.log("byala zmiana !!!!!!!!!!!!!!!!!!!!!!!");
+    this.setSwitcher("for");
+    this.setSwitcher("against");
+    this.setSwitcher("abstention");
+  }
+
   setSwitcher(vote: string) {
     if (this.listOfVOtes == undefined || this.listOfVOtes == null) {
-    } else if (Object.values(this.listOfVOtes)[0] == vote) {
+      // } else if (Object.values(this.listOfVOtes)[0] == vote) {
+    } else if (
+      Object.keys(this.listOfVOtes).includes(this.idPoll) &&
+      this.listOfVOtes[this.idPoll] == vote
+    ) {
+      this.switcher = { for: false, against: false, abstention: false };
       this.switcher[vote] = true;
+      this.increment(vote);
     }
+  }
+
+  getFromSwitcherValueByKey(key) {
+    return this.switcher[key];
   }
 
   onClickMe(voteType: string) {
@@ -168,10 +185,6 @@ export class BoxOfbuttonComponent implements OnInit {
     if (voteType == "abstention") {
       this.votesAbstentionMinus = this.participation;
     }
-  }
-
-  getFromSwitcherValueByKey(key) {
-    return this.switcher[key];
   }
 
   switchButtons(voteType: string) {

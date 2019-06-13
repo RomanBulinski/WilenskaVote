@@ -1,17 +1,21 @@
 <div>
-  <p>RESOLUTIONS:</p>
+  <div>
+    <h5 class="row">VOTES :</h5>
+    <ul class="row">
+      <li *ngFor="let id of iDsOfvotes" class="row">
+        <button (click)="setPoll(id)">{{ id }}</button>
+      </li>
+    </ul>
+  </div>
 
-  <ul>
-    <li *ngFor="let id of iDsOfvotes">
-      <button (click)="setPoll(id)">
-        {{ id }}
-      </button>
-    </li>
-  </ul>
+  <div>
+    <h5 class="row">CURRENT VOTE :</h5>
+    <H3 class="row">{{ idPoll }}</H3>
+  </div>
 
-  <p class="row">
-    VOTE FOR RESOLUTION No.:
-  </p>
+  <h5 class="row">
+    NEW VOTE :
+  </h5>
   <input class="row" type="text" (keyup.enter)="getPoll($event)" />
   <p class="row">
     .....

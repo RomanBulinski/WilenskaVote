@@ -11,7 +11,8 @@ import { STRING_TYPE } from "@angular/compiler/src/output/output_ast";
 })
 export class ResolutionComponent implements OnInit {
   objectKeys = Object.keys;
-  idPoll: string = "give_the_year";
+  idPoll: string = "2016_1";
+
   votesFor: number = 0;
   votesAgainst: number = 0;
   votesAbstention: number = 0;
@@ -96,12 +97,12 @@ export class ResolutionComponent implements OnInit {
         }
       }
     }
-    this.setToString();
+    // this.setToString();
   }
 
-  setToString() {
-    this.iDsOfvotesString = Array.from(this.iDsOfvotes).join(" ");
-  }
+  // setToString() {
+  //   this.iDsOfvotesString = Array.from(this.iDsOfvotes).join(" ");
+  // }
 
   getPoll(event) {
     const inputValue = event.target.value;
@@ -111,6 +112,11 @@ export class ResolutionComponent implements OnInit {
   setPoll(ele) {
     this.idPoll = ele;
     console.log(this.idPoll);
+    // if ((this.idPollIsChange = false)) {
+    //   this.idPollIsChange = true;
+    // } else if ((this.idPollIsChange = true)) {
+    //   this.idPollIsChange = false;
+    // }
   }
 
   getList(obj) {
