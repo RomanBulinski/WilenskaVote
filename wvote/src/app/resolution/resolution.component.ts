@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from "@angular/core";
 import { FirebaseRTDBService } from "../service/firebase-rtdb.service";
 import { AngularFireDatabase, AngularFireList } from "angularfire2/database";
 import { DataserviceService } from "../servicedata/dataservice.service";
+
 import { STRING_TYPE } from "@angular/compiler/src/output/output_ast";
 
 @Component({
@@ -23,9 +24,9 @@ export class ResolutionComponent implements OnInit {
   objectOfBase: AngularFireDatabase;
 
   iDsOfvotes = new Set();
-  // iDsOfvotesString: string = "";
+  iDsOfvotesString = "--------";
 
-  message: string;
+  message2: string;
   // message: [];
 
   constructor(
@@ -37,13 +38,28 @@ export class ResolutionComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.data.currentMessage.subscribe(message => (this.message = message));
     this.sumVotesFromDB();
+    this.data.currentMessage.subscribe(message2 => (this.message2 = message2));
+    this.newMessage();
+  }
+
+  ngOnChanges() {
+    // this.newMessage();
+  }
+
+  newMessage() {
+    let temp = "+";
+
+    let temparray = Array.from(this.iDsOfvotes);
+
+    console.log("tem array : " + temparray);
+
+    // this.data.changeMessage("Hello from Sibling");
+
+    this.data.changeMessage(this.iDsOfvotesString);
   }
 
   sumVotesFromDB() {
-    // this.owners.forEach(n => console.log(n.list_of_votes));
-
     for (let i = 0; i < this.owners.length; i++) {
       if (this.owners[i].list_of_votes != undefined) {
         let temp = this.owners[i].list_of_votes;
@@ -94,15 +110,11 @@ export class ResolutionComponent implements OnInit {
       for (let i = 0; i < splitted.length; i++) {
         if (splitted[i] != " ") {
           this.iDsOfvotes.add(splitted[i]);
+          // this.iDsOfvotes_string.concat(splitted[i]);
         }
       }
     }
-    // this.setToString();
   }
-
-  // setToString() {
-  //   this.iDsOfvotesString = Array.from(this.iDsOfvotes).join(" ");
-  // }
 
   getPoll(event) {
     const inputValue = event.target.value;
@@ -111,7 +123,6 @@ export class ResolutionComponent implements OnInit {
 
   setPoll(ele) {
     this.idPoll = ele;
-    console.log(this.idPoll);
   }
 
   getList(obj) {

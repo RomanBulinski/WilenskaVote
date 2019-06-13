@@ -10,11 +10,7 @@ export class DataserviceService {
 
   constructor() {}
 
-  changeMessage(message: string) {
-    this.messageSource.next(message);
+  changeMessage(message2: string) {
+    this.messageSource.next(message2);
   }
-
-  // changeMessage(message: []) {
-  //   this.messageSource.next(message[]);
-  // }
 }

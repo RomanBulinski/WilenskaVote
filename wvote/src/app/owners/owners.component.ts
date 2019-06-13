@@ -32,12 +32,16 @@ export class OwnersComponent {
   }
 
   getVotes(data) {
-    let temp = "";
-    let tempkeys = Object.keys(data);
-    for (let i = 0; i < tempkeys.length; i++) {
-      temp = temp + tempkeys[i] + " : " + data[tempkeys[i]] + "<br>";
+    if (data != undefined) {
+      let temp = "";
+      let tempkeys = Object.keys(data);
+      for (let i = 0; i < tempkeys.length; i++) {
+        temp = temp + tempkeys[i] + " : " + data[tempkeys[i]] + "<br>";
+      }
+      this.listOfVOtes = temp;
+    } else {
+      this.listOfVOtes = "there is no votes !!!";
     }
-    this.listOfVOtes = temp;
   }
 
   // update(owner) {

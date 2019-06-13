@@ -21,6 +21,7 @@ export class FirebaseRTDBService {
       .subscribe(owners => {
         this.owners = owners;
       });
+
     this.owners$ = db.list("/");
 
     db.list("/")
@@ -92,7 +93,20 @@ export class FirebaseRTDBService {
         list.push(tempObject);
       });
     });
-    console.log(list);
     return list;
+  }
+
+  getAllVOtes() {
+    let votesSet = new Set();
+
+    for (let i = 0; i < this.owners.length; i++) {
+      if (Object.keys(this.owners[i]).includes("list_of_votes")) {
+        let temp = Object.keys(this.owners[i]["list_of_votes"]);
+        for (let j = 0; j < temp.length; j++) {
+          votesSet.add(temp[j]);
+        }
+      }
+    }
+    return Array.from(votesSet).join("<br>");
   }
 }

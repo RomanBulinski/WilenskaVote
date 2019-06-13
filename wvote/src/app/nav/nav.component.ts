@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { DataserviceService } from "../servicedata/dataservice.service";
 
 @Component({
   selector: "app-nav",
@@ -8,7 +9,13 @@ import { Component, OnInit } from "@angular/core";
 export class NavComponent implements OnInit {
   appTitle = "Wilenska5";
 
-  constructor() {}
+  message2: string;
 
-  ngOnInit() {}
+  constructor() // private data: DataserviceService
+  {}
+
+  ngOnInit() {
+    //   this.data.currentMessage.subscribe(message2 => (this.message2 = message2));
+    // }
+  }
 }

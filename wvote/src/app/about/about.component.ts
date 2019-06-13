@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 
 import { AngularFireDatabase } from "angularfire2/database";
 import { FirebaseRTDBService } from "../service/firebase-rtdb.service";
+import { DataserviceService } from "../servicedata/dataservice.service";
 
 @Component({
   selector: "app-about",
@@ -9,11 +10,18 @@ import { FirebaseRTDBService } from "../service/firebase-rtdb.service";
   styleUrls: ["./about.component.scss"]
 })
 export class AboutComponent implements OnInit {
-  owners: any[];
+  // message2: string;
 
-  constructor(db: FirebaseRTDBService) {
-    this.owners = db.getOwners();
+  listOfVOtes;
+
+  constructor(
+    // private data: DataserviceService,
+    public db: FirebaseRTDBService
+  ) {
+    this.listOfVOtes = this.db.getAllVOtes();
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    // this.data.currentMessage.subscribe(message2 => (this.message2 = message2));
+  }
 }
