@@ -20,7 +20,7 @@ export class ResolutionComponent implements OnInit {
   total = 631842;
   buttonId: string;
   buttonOn: boolean = false;
-  owners: any[];
+  owners: any;
   objectOfBase: AngularFireDatabase;
 
   iDsOfvotes = new Set();
@@ -33,51 +33,32 @@ export class ResolutionComponent implements OnInit {
     public db: FirebaseRTDBService,
     private data: DataserviceService
   ) {
-    this.owners = db.getOwners();
+    this.owners = db.getOwnersObservable();
+
+    // this.owners = db.getOwnersAngularFireList();
+    // this.owners = db.getOwners();
     this.objectOfBase = db.getAngularFireDatabase();
   }
-
   ngOnInit() {
-    this.sumVotesFromDB();
+    // this.sumVotesFromDB();
     this.data.currentMessage.subscribe(message2 => (this.message2 = message2));
     this.newMessage();
+    this.getStatisticForVote();
   }
 
-  ngOnChanges() {
-    // this.newMessage();
+  getStatisticForVote() {
+    let statForVote = this.db.getStatisticForVote(this.idPoll);
+    this.votesFor = statForVote["for"];
+    this.votesAgainst = statForVote["against"];
+    this.votesAbstention = statForVote["abstention"];
   }
 
   newMessage() {
     let temp = "+";
-
     let temparray = Array.from(this.iDsOfvotes);
-
     console.log("tem array : " + temparray);
-
     // this.data.changeMessage("Hello from Sibling");
-
     this.data.changeMessage(this.iDsOfvotesString);
-  }
-
-  sumVotesFromDB() {
-    for (let i = 0; i < this.owners.length; i++) {
-      if (this.owners[i].list_of_votes != undefined) {
-        let temp = this.owners[i].list_of_votes;
-        let value = Object.values(temp);
-
-        let perCent = (100 * this.owners[i].participation) / this.total;
-
-        if (value[0] == "for") {
-          this.votesFor = this.votesFor + perCent;
-        }
-        if (value[0] == "against") {
-          this.votesAgainst = this.votesAgainst + perCent;
-        }
-        if (value[0] == "abstention") {
-          this.votesAbstention = this.votesAbstention + perCent;
-        }
-      }
-    }
   }
 
   receiveFor($event) {
@@ -123,6 +104,7 @@ export class ResolutionComponent implements OnInit {
 
   setPoll(ele) {
     this.idPoll = ele;
+    this.getStatisticForVote();
   }
 
   getList(obj) {

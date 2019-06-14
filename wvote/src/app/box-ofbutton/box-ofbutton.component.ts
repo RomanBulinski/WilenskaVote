@@ -25,7 +25,6 @@ export class BoxOfbuttonComponent implements OnInit {
   @Input() id: string;
   @Input() listOfVOtes;
   @Input() idPoll;
-  // idPoll: string = "2000";
 
   @Output() messageEventVotesFor = new EventEmitter<string>();
   @Output() messageEventVotesAgainst = new EventEmitter<string>();
@@ -50,12 +49,11 @@ export class BoxOfbuttonComponent implements OnInit {
     this.setSwitcher("against");
     this.setSwitcher("abstention");
     this.getIdVotesListFromOwner();
-    // let idVotesList = String(this.idVotesList.join(" "));
+
     this.sendidVotesList();
   }
 
   ngOnChanges() {
-    console.log("byala zmiana !!!!!!!!!!!!!!!!!!!!!!!");
     this.setSwitcher("for");
     this.setSwitcher("against");
     this.setSwitcher("abstention");
@@ -63,14 +61,15 @@ export class BoxOfbuttonComponent implements OnInit {
 
   setSwitcher(vote: string) {
     if (this.listOfVOtes == undefined || this.listOfVOtes == null) {
-      // } else if (Object.values(this.listOfVOtes)[0] == vote) {
+      this.switcher = { for: false, against: false, abstention: false };
     } else if (
       Object.keys(this.listOfVOtes).includes(this.idPoll) &&
       this.listOfVOtes[this.idPoll] == vote
     ) {
       this.switcher = { for: false, against: false, abstention: false };
       this.switcher[vote] = true;
-      this.increment(vote);
+    } else if (!Object.keys(this.listOfVOtes).includes(this.idPoll)) {
+      this.switcher = { for: false, against: false, abstention: false };
     }
   }
 

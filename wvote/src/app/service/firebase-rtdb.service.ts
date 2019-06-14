@@ -14,6 +14,7 @@ export class FirebaseRTDBService {
   ownerObservable: any[];
   owner: Owner = new Owner();
   valueOfVot: string;
+  total = 631842;
 
   constructor(public db: AngularFireDatabase) {
     db.list("/")
@@ -44,6 +45,10 @@ export class FirebaseRTDBService {
 
   getOwners() {
     return this.owners;
+  }
+
+  getOwnersObservable() {
+    return this.ownerObservable;
   }
 
   getOwnersAngularFireList() {
@@ -98,7 +103,6 @@ export class FirebaseRTDBService {
 
   getAllVOtes() {
     let votesSet = new Set();
-
     for (let i = 0; i < this.owners.length; i++) {
       if (Object.keys(this.owners[i]).includes("list_of_votes")) {
         let temp = Object.keys(this.owners[i]["list_of_votes"]);
@@ -108,5 +112,22 @@ export class FirebaseRTDBService {
       }
     }
     return Array.from(votesSet).join("<br>");
+  }
+
+  getStatisticForVote(voteID: string) {
+    let voteResult;
+    let stat = { for: 0, against: 0, abstention: 0 };
+
+    for (let i = 0; i < this.owners.length; i++) {
+      if (Object.keys(this.owners[i]).includes("list_of_votes")) {
+        let kesVOte = this.owners[i].list_of_votes;
+        if (Object.keys(kesVOte).includes(voteID)) {
+          voteResult = kesVOte[voteID];
+        }
+        stat[voteResult] =
+          stat[voteResult] + (this.owners[i].participation * 100) / this.total;
+      }
+    }
+    return stat;
   }
 }
