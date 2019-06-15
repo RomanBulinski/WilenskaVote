@@ -1,16 +1,27 @@
-<p>
-  home works!
-</p>
-
-<p *ngIf="authService.isLoggedIn()">
-  Welcome
-</p>
-<ul>
-  <li *ngIf="authService.isLoggedIn()"><a routerLink="/admin">Admin</a></li>
-  <li><a routerLink="/login">Login</a></li>
-  <li *ngIf="authService.isLoggedIn()">
-    <a (click)="authService.logout()">Logout</a>
-  </li>
-</ul>
-
 <img width="220" height="250" border="0" align="center" src="{{ pict }}" />
+
+<!-- <header>
+  <div class="container">
+    <p *ngIf="authService.isLoggedIn()">Welcome</p>
+    <nav>
+      <ul>
+        <li *ngIf="authService.isLoggedIn()">
+          <a routerLink="/about">About</a>
+        </li>
+        <li *ngIf="authService.isLoggedIn()">
+          <a routerLink="/owners">Owners</a>
+        </li>
+        <li *ngIf="authService.isLoggedIn()">
+          <a routerLink="/resolution">Resolution</a>
+        </li>
+        <li><a routerLink="/contact">Contact</a></li>
+
+        <li><a routerLink="/login">Login</a></li>
+
+        <li *ngIf="authService.isLoggedIn()">
+          <a (click)="authService.logout()">Logout</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header> -->

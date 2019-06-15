@@ -45,6 +45,7 @@ import { AuthService } from "./services/auth.service";
 import { FormsModule } from "@angular/forms";
 import { HttpModule, Http, BaseRequestOptions } from "@angular/http";
 import { RouterModule } from "@angular/router";
+import { HallComponent } from './hall/hall.component';
 
 export function getAuthHttp(http) {
   return new AuthHttp(
@@ -71,7 +72,8 @@ export function getAuthHttp(http) {
     LoginComponent,
     NoAccessComponent,
     NotFoundComponent,
-    SignupComponent
+    SignupComponent,
+    HallComponent
   ],
   imports: [
     BrowserModule,
