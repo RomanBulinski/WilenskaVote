@@ -2,4 +2,15 @@
   home works!
 </p>
 
+<p *ngIf="authService.isLoggedIn()">
+  Welcome
+</p>
+<ul>
+  <li *ngIf="authService.isLoggedIn()"><a routerLink="/admin">Admin</a></li>
+  <li><a routerLink="/login">Login</a></li>
+  <li *ngIf="authService.isLoggedIn()">
+    <a (click)="authService.logout()">Logout</a>
+  </li>
+</ul>
+
 <img width="220" height="250" border="0" align="center" src="{{ pict }}" />

@@ -23,6 +23,37 @@ import { AngularFireDatabaseModule } from "angularfire2/database";
 import { ReactiveFormsModule } from "@angular/forms";
 import { BoxOfbuttonComponent } from "./box-ofbutton/box-ofbutton.component";
 import { Mybutton2Component } from "./mybutton2/mybutton2.component";
+import { AdminComponent } from "./admin/admin.component";
+import { LoginComponent } from "./login/login.component";
+import { NoAccessComponent } from "./no-access/no-access.component";
+import { NotFoundComponent } from "./not-found/not-found.component";
+import { SignupComponent } from "./signup/signup.component";
+
+import {
+  AuthHttp,
+  AUTH_PROVIDERS,
+  provideAuth,
+  AuthConfig
+} from "angular2-jwt/angular2-jwt";
+import { OrderService } from "./services/order.service";
+import { AdminAuthGuard } from "./admin-auth-guard.service";
+import { AuthGuard } from "./auth-guard.service";
+import { MockBackend } from "@angular/http/testing";
+import { fakeBackendProvider } from "./helpers/fake-backend";
+import { AuthService } from "./services/auth.service";
+
+import { FormsModule } from "@angular/forms";
+import { HttpModule, Http, BaseRequestOptions } from "@angular/http";
+import { RouterModule } from "@angular/router";
+
+export function getAuthHttp(http) {
+  return new AuthHttp(
+    new AuthConfig({
+      tokenName: "token"
+    }),
+    http
+  );
+}
 
 @NgModule({
   declarations: [
@@ -35,7 +66,12 @@ import { Mybutton2Component } from "./mybutton2/mybutton2.component";
     OwnersComponent,
     // MyButtonComponent,
     BoxOfbuttonComponent,
-    Mybutton2Component
+    Mybutton2Component,
+    AdminComponent,
+    LoginComponent,
+    NoAccessComponent,
+    NotFoundComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,
@@ -44,9 +80,27 @@ import { Mybutton2Component } from "./mybutton2/mybutton2.component";
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ],
-  providers: [AngularFireModule, FirebaseRTDBService],
+  providers: [
+    AngularFireModule,
+    FirebaseRTDBService,
+    OrderService,
+
+    AuthService,
+    AuthGuard,
+    AdminAuthGuard,
+    AuthHttp,
+    {
+      provide: AuthHttp,
+      useFactory: getAuthHttp,
+      deps: [Http]
+    },
+    fakeBackendProvider,
+    MockBackend,
+    BaseRequestOptions
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
