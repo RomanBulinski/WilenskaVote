@@ -12,16 +12,20 @@ import { DataserviceService } from "../servicedata/dataservice.service";
 export class AboutComponent implements OnInit {
   // message2: string;
 
-  listOfVOtes;
+  listOfVOtes: any[];
+  statisticForVOtes: any[] = [];
 
-  constructor(
-    // private data: DataserviceService,
-    public db: FirebaseRTDBService
-  ) {
+  constructor(public db: FirebaseRTDBService) {
     this.listOfVOtes = this.db.getAllVOtes();
   }
 
   ngOnInit() {
-    // this.data.currentMessage.subscribe(message2 => (this.message2 = message2));
+    for (let i = 0; i < this.listOfVOtes.length; i++) {
+      console.log(this.listOfVOtes[i]);
+      console.log(this.db.getStatisticForVote(this.listOfVOtes[i]));
+      this.statisticForVOtes.push(
+        this.db.getStatisticForVote(this.listOfVOtes[i])
+      );
+    }
   }
 }

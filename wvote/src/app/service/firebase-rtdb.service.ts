@@ -111,7 +111,8 @@ export class FirebaseRTDBService {
         }
       }
     }
-    return Array.from(votesSet).join("<br>");
+    // return Array.from(votesSet).join("<br>");
+    return Array.from(votesSet);
   }
 
   getStatisticForVote(voteID: string) {
@@ -124,7 +125,7 @@ export class FirebaseRTDBService {
         if (Object.keys(kesVOte).includes(voteID)) {
           voteResult = kesVOte[voteID];
           let temp = stat[voteResult];
-          console.log(this.owners[i].participation);
+          // console.log(this.owners[i].participation);
           stat[voteResult] =
             temp + (this.owners[i].participation * 100) / this.total;
         }
@@ -134,10 +135,6 @@ export class FirebaseRTDBService {
   }
 
   deletVoteFRomList(idOwner: string, idPoll) {
-    console.log("owner id : " + this.owners[idOwner].id);
-    console.log("owner id : " + this.owners[idOwner].list_of_votes.idPoll);
-    console.log("owner id : " + this.owners[idOwner].list_of_votes[idPoll]);
-
     let tempObject = this.db.list(
       "/" + [idOwner] + "/list_of_votes/" + [idPoll]
     );

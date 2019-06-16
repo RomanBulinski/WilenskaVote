@@ -95,10 +95,6 @@ export class BoxOfbuttonComponent implements OnInit {
       this.switchButtonOFF(voteType);
       this.decrement(voteType);
       this.db.deletVoteFRomList(this.id, this.idPoll);
-      // this.deleteVoteByIdPoll();
-
-      // this.delateList();
-
       if (voteType == "for") {
         this.sendButtonVotesForMinus();
       }
@@ -127,26 +123,9 @@ export class BoxOfbuttonComponent implements OnInit {
     owner.valueChanges();
   }
 
-  // deleteVoteByIdPoll() {
-  // let tempObject = this.owners[this.id].list_of_votes.idPoll;
-  // console.log(this.owners[this.id].list_of_votes[this.idPoll]);
-  // tempObject = "";
-  // this.owners[idOwner].list_of_votes[this.idPoll] = "";
-  // tempObject.remove();
-  // }
-
   getIdVotesListFromOwner() {
     this.idVotesList = Object.keys(this.listOfVOtes);
   }
-
-  // getListOfVotes() {
-  //   this.db.getListOfVOtes(this.id);
-  // }
-
-  // delateList() {
-  //   let tempObject = this.db.getOwner(this.id + "/list_of_votes/");
-  //   tempObject.remove();
-  // }
 
   sendButtonVotesFor() {
     this.messageEventVotesFor.emit(String(this.votesFor));

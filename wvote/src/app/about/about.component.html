@@ -2,4 +2,28 @@
   LIST OF VOTES
 </p>
 
-<div [innerHTML]="listOfVOtes"></div>
+<!-- <div [innerHTML]="listOfVOtes"></div> -->
+
+<div class="row">
+  <div class="row">
+    <ul>
+      <li *ngFor="let vote of listOfVOtes">
+        <div>
+          {{ vote }}
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="row">
+    <ul>
+      <li *ngFor="let stat of statisticForVOtes">
+        <div>
+          for:{{ stat.for | number: ".2" }}% against{{
+            stat.against | number: ".2"
+          }}% abstention:{{ stat.abstention | number: ".2" }}%
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>

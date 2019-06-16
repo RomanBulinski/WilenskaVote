@@ -1,10 +1,10 @@
 <header>
   <div class="container">
-    <p *ngIf="authService.isLoggedIn()">Welcome</p>
+    <a *ngIf="authService.isLoggedIn()">WILEŃSKA</a>
     <nav>
       <ul>
         <li *ngIf="authService.isLoggedIn()">
-          <a routerLink="/about">About</a>
+          <a routerLink="/about">Votes</a>
         </li>
         <li *ngIf="authService.isLoggedIn()">
           <a routerLink="/owners">Owners</a>
@@ -23,17 +23,3 @@
     </nav>
   </div>
 </header>
-
-<!-- <header>
-  <div class="container">
-    <a routerLink="/home" class="logo">{{ appTitle }}</a>
-    <nav>
-      <ul>
-        <li><a routerLink="/about">About</a></li>
-        <li><a routerLink="/owners">Owners</a></li>
-        <li><a routerLink="/resolution">Resolution</a></li>
-        <li><a routerLink="/contact">Contact us</a></li>
-      </ul>
-    </nav>
-  </div>
-</header> -->
