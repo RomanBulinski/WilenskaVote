@@ -26,8 +26,8 @@ export function fakeBackendFactory(
         connection.request.method === RequestMethod.Post
       ) {
         let body = JSON.parse(connection.request.getBody());
-        // if (body.email === 'mosh@domain.com' && body.password === '1234') {
-        if (body.email === "admin" && body.password === "admin") {
+        // if (body.email === 'a' && body.password === 'a') {
+        if (body.email === "a" && body.password === "a") {
           connection.mockRespond(
             new Response(
               new ResponseOptions({

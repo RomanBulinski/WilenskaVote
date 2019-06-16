@@ -25,7 +25,8 @@
 <ul>
   <li *ngFor="let owner of owners">
     <div>
-      Wilenska : {{ owner.property }}. participation : {{ owner.participation }}
+      {{ owner.property }}:{{ owner.fullname }}:
+      {{ owner.participation }}
 
       <app-box-ofbutton
         [idPoll]="idPoll"

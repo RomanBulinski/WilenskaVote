@@ -123,11 +123,24 @@ export class FirebaseRTDBService {
         let kesVOte = this.owners[i].list_of_votes;
         if (Object.keys(kesVOte).includes(voteID)) {
           voteResult = kesVOte[voteID];
+          let temp = stat[voteResult];
+          console.log(this.owners[i].participation);
+          stat[voteResult] =
+            temp + (this.owners[i].participation * 100) / this.total;
         }
-        stat[voteResult] =
-          stat[voteResult] + (this.owners[i].participation * 100) / this.total;
       }
     }
     return stat;
+  }
+
+  deletVoteFRomList(idOwner: string, idPoll) {
+    console.log("owner id : " + this.owners[idOwner].id);
+    console.log("owner id : " + this.owners[idOwner].list_of_votes.idPoll);
+    console.log("owner id : " + this.owners[idOwner].list_of_votes[idPoll]);
+
+    let tempObject = this.db.list(
+      "/" + [idOwner] + "/list_of_votes/" + [idPoll]
+    );
+    tempObject.remove();
   }
 }

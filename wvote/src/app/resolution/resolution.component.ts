@@ -41,8 +41,13 @@ export class ResolutionComponent implements OnInit {
   }
   ngOnInit() {
     // this.sumVotesFromDB();
-    this.data.currentMessage.subscribe(message2 => (this.message2 = message2));
-    this.newMessage();
+
+    // this.votesFor = 0;
+    // this.votesAgainst = 0;
+    // this.votesAbstention = 0;
+
+    // this.data.currentMessage.subscribe(message2 => (this.message2 = message2));
+    // this.newMessage();
     this.getStatisticForVote();
   }
 
@@ -53,13 +58,13 @@ export class ResolutionComponent implements OnInit {
     this.votesAbstention = statForVote["abstention"];
   }
 
-  newMessage() {
-    let temp = "+";
-    let temparray = Array.from(this.iDsOfvotes);
-    console.log("tem array : " + temparray);
-    // this.data.changeMessage("Hello from Sibling");
-    this.data.changeMessage(this.iDsOfvotesString);
-  }
+  // newMessage() {
+  //   let temp = "+";
+  //   let temparray = Array.from(this.iDsOfvotes);
+  //   console.log("tem array : " + temparray);
+  //   // this.data.changeMessage("Hello from Sibling");
+  //   this.data.changeMessage(this.iDsOfvotesString);
+  // }
 
   receiveFor($event) {
     this.votesFor = this.votesFor + (100 * JSON.parse($event)) / this.total;
