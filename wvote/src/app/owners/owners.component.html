@@ -10,7 +10,7 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-sm-8" style="background-color:lavenderblush;">
-          {{ owner.$value || i }} : {{ owner.fullname }} : {{ owner.property }}
+          {{ owner.property }} : {{ owner.fullname }}
         </div>
         <div class="col-sm-2" style="background-color:white;">
           <button (click)="getInfo(owner)" class="selected">INFO</button>
