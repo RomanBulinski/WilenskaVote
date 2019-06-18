@@ -8,6 +8,7 @@ import { AuthService } from "./../services/auth.service";
 })
 export class HomeComponent implements OnInit {
   pict = "assets/mount.jpg";
+  vile = "assets/wil.jpg";
   constructor(private authService: AuthService) {}
 
   ngOnInit() {}

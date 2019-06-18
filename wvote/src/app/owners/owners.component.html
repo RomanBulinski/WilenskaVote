@@ -1,15 +1,30 @@
-<h4>OWNERS</h4>
+<h1>OWNERS</h1>
 
-<div>
+<div class="floating">
+  <div>{{ ownerName }}</div>
   <div [innerHTML]="listOfVOtes"></div>
 </div>
 
 <ul>
   <li *ngFor="let owner of owners; let i = index">
-    {{ owner.$value || i }} : {{ owner.fullname }} : {{ owner.property }}
-
-    <button (click)="getInfo(owner)">INFO</button>
-    <button (click)="getVotes(owner.list_of_votes)">GET VOTES</button>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-8" style="background-color:lavenderblush;">
+          {{ owner.$value || i }} : {{ owner.fullname }} : {{ owner.property }}
+        </div>
+        <div class="col-sm-2" style="background-color:white;">
+          <button (click)="getInfo(owner)" class="selected">INFO</button>
+        </div>
+        <div class="col-sm-2" style="background-color:white;">
+          <button
+            (click)="getInfoVotes(owner.fullname, owner.list_of_votes)"
+            class="selected"
+          >
+            GET VOTES
+          </button>
+        </div>
+      </div>
+    </div>
   </li>
 </ul>
 

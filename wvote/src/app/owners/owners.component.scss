@@ -1,3 +1,17 @@
-.row {
-  display: inline-block;
+.selected {
+  background-color: gray;
+  color: white;
+  padding: 3px;
+  border-radius: 10px;
+  height: 10;
+  width: 100px;
+  margin: 3px;
+}
+
+.floating {
+  display: block;
+  position: fixed;
+  float: left;
+  bottom: 50px;
+  left: 50px;
 }

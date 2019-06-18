@@ -27,27 +27,15 @@ export class ResolutionComponent implements OnInit {
   iDsOfvotesString = "--------";
 
   message2: string;
-  // message: [];
 
   constructor(
     public db: FirebaseRTDBService,
     private data: DataserviceService
   ) {
     this.owners = db.getOwnersObservable();
-
-    // this.owners = db.getOwnersAngularFireList();
-    // this.owners = db.getOwners();
     this.objectOfBase = db.getAngularFireDatabase();
   }
   ngOnInit() {
-    // this.sumVotesFromDB();
-
-    // this.votesFor = 0;
-    // this.votesAgainst = 0;
-    // this.votesAbstention = 0;
-
-    // this.data.currentMessage.subscribe(message2 => (this.message2 = message2));
-    // this.newMessage();
     this.getStatisticForVote();
   }
 
@@ -57,14 +45,6 @@ export class ResolutionComponent implements OnInit {
     this.votesAgainst = statForVote["against"];
     this.votesAbstention = statForVote["abstention"];
   }
-
-  // newMessage() {
-  //   let temp = "+";
-  //   let temparray = Array.from(this.iDsOfvotes);
-  //   console.log("tem array : " + temparray);
-  //   // this.data.changeMessage("Hello from Sibling");
-  //   this.data.changeMessage(this.iDsOfvotesString);
-  // }
 
   receiveFor($event) {
     this.votesFor = this.votesFor + (100 * JSON.parse($event)) / this.total;

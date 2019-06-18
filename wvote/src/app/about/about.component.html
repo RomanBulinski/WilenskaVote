@@ -1,29 +1,65 @@
-<p>
-  LIST OF VOTES
-</p>
-
 <!-- <div [innerHTML]="listOfVOtes"></div> -->
 
-<div class="row">
-  <div class="row">
-    <ul>
-      <li *ngFor="let vote of listOfVOtes">
-        <div>
-          {{ vote }}
-        </div>
-      </li>
-    </ul>
-  </div>
+<h1>LIST OF VOTES</h1>
+<p>Poland’s democracy.</p>
 
+<div class="container-fluid">
   <div class="row">
-    <ul>
-      <li *ngFor="let stat of statisticForVOtes">
-        <div>
-          for:{{ stat.for | number: ".2" }}% against{{
-            stat.against | number: ".2"
-          }}% abstention:{{ stat.abstention | number: ".2" }}%
+    <div class="col-sm-4" style="background-color:white;"></div>
+    <div class="col-sm-8" style="background-color:white;">
+      <div>
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-sm-4 text-white" style="background-color:#7700ff;">
+              <h4>YES</h4>
+            </div>
+            <div class="col-sm-4 text-white" style="background-color:#7700ff;">
+              <h4>NO</h4>
+            </div>
+            <div class="col-sm-4 text-white" style="background-color:#7700ff;">
+              <h4>ABSTENTION</h4>
+            </div>
+          </div>
         </div>
-      </li>
-    </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div>.</div>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-4" style="background-color:lavender;">
+      <ul>
+        <li *ngFor="let vote of listOfVOtes">
+          <div>
+            {{ vote }}
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="col-sm-8" style="background-color:lavenderblush;">
+      <ul>
+        <li *ngFor="let stat of statisticForVOtes">
+          <div>
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-sm-4" style="background-color:lavenderblush;">
+                  {{ stat.for | number: ".2" }} %
+                </div>
+                <div class="col-sm-4" style="background-color:lavenderblush;">
+                  {{ stat.against | number: ".2" }} %
+                </div>
+                <div class="col-sm-4" style="background-color:lavenderblush;">
+                  {{ stat.abstention | number: ".2" }} %
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
   </div>
 </div>

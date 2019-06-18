@@ -18,6 +18,7 @@ export class OwnersComponent {
   owners: any[];
   newOwners$: any;
   owner: Owner = new Owner();
+  ownerName;
   listOfVOtes;
 
   constructor(private db: FirebaseRTDBService) {
@@ -29,6 +30,11 @@ export class OwnersComponent {
   add(owner: HTMLInputElement) {
     this.db.createOwner(owner.value, this.owner);
     owner.value = "dodane";
+  }
+
+  getInfoVotes(name, list) {
+    this.getVotes(list);
+    this.ownerName = name;
   }
 
   getVotes(data) {

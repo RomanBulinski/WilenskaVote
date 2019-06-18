@@ -1,15 +1,6 @@
-button {
-  // background: rgb(238, 238, 238);
-  padding: 1em;
-  border-radius: 10px;
-  // margin-bottom: 7px;
-  display: inline;
-  // grid-template-columns: 60px auto;
-}
-
-.row {
-  display: inline-block;
-}
+// .row {
+//   display: inline-block;
+// }
 
 .oneOwner {
   height: 50px;
@@ -17,4 +8,13 @@ button {
 
 .sum {
   text-size-adjust: 10px;
+}
+
+.btn-space {
+  margin-right: 5px;
+}
+
+ul {
+  list-style: none;
+  padding-left: 0;
 }

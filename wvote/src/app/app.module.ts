@@ -45,7 +45,8 @@ import { AuthService } from "./services/auth.service";
 import { FormsModule } from "@angular/forms";
 import { HttpModule, Http, BaseRequestOptions } from "@angular/http";
 import { RouterModule } from "@angular/router";
-import { HallComponent } from './hall/hall.component';
+import { HallComponent } from "./hall/hall.component";
+import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 
 export function getAuthHttp(http) {
   return new AuthHttp(
@@ -83,7 +84,8 @@ export function getAuthHttp(http) {
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    NgbModule
   ],
   providers: [
     AngularFireModule,
