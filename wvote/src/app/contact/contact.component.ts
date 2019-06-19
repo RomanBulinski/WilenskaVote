@@ -1,5 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { ContService } from "./cont.service";
+import * as emailjs from "emailjs-com";
 
 @Component({
   selector: "app-contact",
@@ -11,7 +13,15 @@ export class ContactComponent implements OnInit {
   submitted = false;
   success = false;
 
-  constructor(private formBuilder: FormBuilder) {}
+  templateParams = {
+    name: "James",
+    notes: "Check this out!"
+  };
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private contService: ContService
+  ) {}
 
   ngOnInit() {
     this.messageForm = this.formBuilder.group({
@@ -22,11 +32,21 @@ export class ContactComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
-
     if (this.messageForm.invalid) {
       return;
     }
-
     this.success = true;
+
+    console.log("wyyyysylam");
+    emailjs
+      .sendForm("wilenskaId", "gmail", "#myForm", "user_DpWteY7OokMzCVhDLY0yZ")
+      .then(
+        function(response) {
+          console.log("SUCCESS!", response.status, response.text);
+        },
+        function(err) {
+          console.log("FAILED...", err);
+        }
+      );
   }
 }

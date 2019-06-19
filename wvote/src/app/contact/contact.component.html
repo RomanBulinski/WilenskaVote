@@ -1,10 +1,10 @@
 <h1>Contact</h1>
-<form [formGroup]="messageForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="messageForm" (ngSubmit)="onSubmit()" id="myForm">
   <h5 *ngIf="success">Your form is valid!</h5>
 
   <label>
     Name:
-    <input type="text" formControlName="name" />
+    <input type="text" formControlName="name" name="name" />
     <div *ngIf="submitted && messageForm.controls.name.errors" class="error">
       <div *ngIf="messageForm.controls.name.errors.required">
         Your name is required
@@ -14,7 +14,7 @@
 
   <label>
     Message:
-    <textarea formControlName="message"></textarea>
+    <textarea formControlName="message" name="message"></textarea>
     <div *ngIf="submitted && messageForm.controls.message.errors" class="error">
       <div *ngIf="messageForm.controls.message.errors.required">
         A message is required

@@ -48,6 +48,8 @@ import { RouterModule } from "@angular/router";
 import { HallComponent } from "./hall/hall.component";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 
+import { ContService } from "./contact/cont.service";
+
 export function getAuthHttp(http) {
   return new AuthHttp(
     new AuthConfig({
@@ -103,7 +105,8 @@ export function getAuthHttp(http) {
     },
     fakeBackendProvider,
     MockBackend,
-    BaseRequestOptions
+    BaseRequestOptions,
+    ContService
   ],
   bootstrap: [AppComponent]
 })
