@@ -16,30 +16,14 @@ export class FirebaseRTDBService {
   valueOfVot: string;
   total = 631842;
 
-  //   this.afs.list("marker").valueChanges().subscribe( (data: any) => {
-  //     data.forEach(item => {
-  //       console.log("Lat: "+item.lat+" Lng: "+item.lng)
-  //     }
-  // });
-
   constructor(public db: AngularFireDatabase) {
-    // setTimeout(() => {
-    //   db.list("/")
-    //     .valueChanges()
-    //     .subscribe((owners: any[]) => {
-    //       this.owners = owners;
-    //     });
-    // }, 5000);
-
     db.list("/")
       .valueChanges()
       .subscribe((owners: any[]) => {
         this.owners = owners;
-        console.log("zbieram dane");
       });
 
     this.owners$ = db.list("/");
-
     db.list("/")
       .valueChanges() // returns observable
       .subscribe(list => {

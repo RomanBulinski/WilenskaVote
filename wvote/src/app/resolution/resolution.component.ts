@@ -71,15 +71,17 @@ export class ResolutionComponent implements OnInit {
   }
 
   receiveIdVotesList($event) {
-    if ($event != null || $event != undefined) {
-      let splitted = $event.split(" ");
-      for (let i = 0; i < splitted.length; i++) {
-        if (splitted[i] != " ") {
-          this.iDsOfvotes.add(splitted[i]);
-          // this.iDsOfvotes_string.concat(splitted[i]);
+    setTimeout(() => {
+      if ($event != null || $event != undefined) {
+        let splitted = $event.split(" ");
+        for (let i = 0; i < splitted.length; i++) {
+          if (splitted[i] != " ") {
+            this.iDsOfvotes.add(splitted[i]);
+            // this.iDsOfvotes_string.concat(splitted[i]);
+          }
         }
       }
-    }
+    }, 1000);
   }
 
   getPoll(event) {

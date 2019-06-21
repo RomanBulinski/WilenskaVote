@@ -12,8 +12,6 @@ import { ResolutionComponent } from "./resolution/resolution.component";
 import { OwnersComponent } from "./owners/owners.component";
 
 import { FirebaseRTDBService } from "./service/firebase-rtdb.service";
-
-// import { MyButtonComponent } from "./my-button/my-button.component";
 import { HttpClientModule } from "@angular/common/http";
 
 import { AngularFireAuthModule } from "angularfire2/auth";
@@ -45,7 +43,7 @@ import { AuthService } from "./services/auth.service";
 import { FormsModule } from "@angular/forms";
 import { HttpModule, Http, BaseRequestOptions } from "@angular/http";
 import { RouterModule } from "@angular/router";
-import { HallComponent } from "./hall/hall.component";
+import { HallComponent } from "./old_hall/hall.component";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 
 import { ContService } from "./contact/cont.service";
@@ -68,7 +66,6 @@ export function getAuthHttp(http) {
     AboutComponent,
     ResolutionComponent,
     OwnersComponent,
-    // MyButtonComponent,
     BoxOfbuttonComponent,
     Mybutton2Component,
     AdminComponent,
