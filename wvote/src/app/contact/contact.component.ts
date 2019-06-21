@@ -13,11 +13,6 @@ export class ContactComponent implements OnInit {
   submitted = false;
   success = false;
 
-  templateParams = {
-    name: "James",
-    notes: "Check this out!"
-  };
-
   constructor(
     private formBuilder: FormBuilder,
     private contService: ContService
@@ -36,8 +31,6 @@ export class ContactComponent implements OnInit {
       return;
     }
     this.success = true;
-
-    console.log("wyyyysylam");
     emailjs
       .sendForm("wilenskaId", "gmail", "#myForm", "user_DpWteY7OokMzCVhDLY0yZ")
       .then(

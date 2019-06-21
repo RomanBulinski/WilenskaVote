@@ -2,6 +2,7 @@
 
 <div class="floating">
   <div>{{ ownerName }}</div>
+  <div>------------------</div>
   <div [innerHTML]="listOfVOtes"></div>
 </div>
 
@@ -9,19 +10,27 @@
   <li *ngFor="let owner of owners; let i = index">
     <div class="container-fluid">
       <div class="row">
-        <div class="col-sm-8" style="background-color:lavenderblush;">
-          {{ owner.property }} : {{ owner.fullname }}
-        </div>
-        <div class="col-sm-2" style="background-color:white;">
-          <button (click)="getInfo(owner)" class="selected">INFO</button>
-        </div>
-        <div class="col-sm-2" style="background-color:white;">
+        <div class="col-sm-3 text-light" style="background-color:white;">
+          <button
+            (click)="getInfo(owner)"
+            type="button"
+            class="btn btn-outline-dark btn-sm ml-1 mt-2 "
+          >
+            info
+          </button>
           <button
             (click)="getInfoVotes(owner.fullname, owner.list_of_votes)"
-            class="selected"
+            type="button"
+            class="btn btn-outline-dark btn-sm ml-1 mt-2 "
           >
-            GET VOTES
+            votes
           </button>
+        </div>
+
+        <div class="col-sm-9" style="background-color:whiteh;">
+          <div style="background-color:lavenderblush;">
+            {{ owner.property }} : {{ owner.fullname }}
+          </div>
         </div>
       </div>
     </div>

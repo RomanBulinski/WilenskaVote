@@ -9,18 +9,33 @@ import { defineBase } from "@angular/core/src/render3";
   providedIn: "root"
 })
 export class FirebaseRTDBService {
-  owners: any[];
+  owners: any[] = [];
   owners$: AngularFireList<Owner>;
   ownerObservable: any[];
   owner: Owner = new Owner();
   valueOfVot: string;
   total = 631842;
 
+  //   this.afs.list("marker").valueChanges().subscribe( (data: any) => {
+  //     data.forEach(item => {
+  //       console.log("Lat: "+item.lat+" Lng: "+item.lng)
+  //     }
+  // });
+
   constructor(public db: AngularFireDatabase) {
+    // setTimeout(() => {
+    //   db.list("/")
+    //     .valueChanges()
+    //     .subscribe((owners: any[]) => {
+    //       this.owners = owners;
+    //     });
+    // }, 5000);
+
     db.list("/")
       .valueChanges()
-      .subscribe(owners => {
+      .subscribe((owners: any[]) => {
         this.owners = owners;
+        console.log("zbieram dane");
       });
 
     this.owners$ = db.list("/");

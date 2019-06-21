@@ -30,20 +30,22 @@
 
 <div class="container-fluid">
   <div class="row">
-    <div class="col-sm-4" style="background-color:lavender;">
+    <div class="col-sm-4">
       <ul>
         <li *ngFor="let vote of listOfVOtes">
-          <div>
-            {{ vote }}
+          <div class="oneline">
+            <div style="background-color:lavender;">
+              {{ vote }}
+            </div>
           </div>
         </li>
       </ul>
     </div>
 
-    <div class="col-sm-8" style="background-color:lavenderblush;">
+    <div class="col-sm-8">
       <ul>
         <li *ngFor="let stat of statisticForVOtes">
-          <div>
+          <div class="oneline">
             <div class="container-fluid">
               <div class="row">
                 <div class="col-sm-4" style="background-color:lavenderblush;">
